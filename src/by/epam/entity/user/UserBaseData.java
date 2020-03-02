@@ -1,5 +1,6 @@
 package by.epam.entity.user;
 
+import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
 
 import java.util.Objects;
@@ -9,13 +10,22 @@ public class UserBaseData {
     private Gender gender;
     private int height;
     private double weight;
+    private ActivityLevel activityLevel;
 
-
-    public UserBaseData(int age, Gender gender, int height, double weight) {
+    public UserBaseData(int age, Gender gender, int height, double weight, ActivityLevel activityLevel) {
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
+        this.activityLevel = activityLevel;
+    }
+
+    public ActivityLevel getActivityLevel() {
+        return activityLevel;
+    }
+
+    public void setActivityLevel(ActivityLevel activityLevel) {
+        this.activityLevel = activityLevel;
     }
 
     public int getAge() {
