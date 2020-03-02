@@ -1,6 +1,7 @@
 package by.epam.entity.user;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class User {
     private String name;
@@ -43,5 +44,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(email);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("name='" + name + "'")
+                .add("surname='" + surname + "'")
+                .add("email='" + email + "'")
+                .toString();
     }
 }
