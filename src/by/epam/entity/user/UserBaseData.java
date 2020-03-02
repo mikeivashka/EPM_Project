@@ -1,40 +1,21 @@
-package by.epam.entity;
+package by.epam.entity.user;
 
 import by.epam.collections.Gender;
 
 import java.util.Objects;
 
 public class UserBaseData {
-    private String name;
-    private String surname;
     private int age;
     private Gender gender;
     private int height;
     private double weight;
 
-    public UserBaseData(String name, String surname, int age, Gender gender, int height, double weight) {
-        this.name = name;
-        this.surname = surname;
+
+    public UserBaseData(int age, Gender gender, int height, double weight) {
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public int getAge() {
@@ -77,13 +58,11 @@ public class UserBaseData {
         return age == that.age &&
                 height == that.height &&
                 Double.compare(that.weight, weight) == 0 &&
-                name.equals(that.name) &&
-                surname.equals(that.surname) &&
                 gender == that.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, age, gender, height, weight);
+        return Objects.hash(age, gender, height, weight);
     }
 }
