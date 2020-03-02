@@ -1,5 +1,6 @@
 package by.epam.entity;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Product {
@@ -15,6 +16,20 @@ public class Product {
     }
     public int getCaloriesCapacity() {
         return caloriesCapacity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return caloriesCapacity == product.caloriesCapacity &&
+                title.equals(product.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, caloriesCapacity);
     }
 
     @Override
