@@ -72,7 +72,14 @@ public class UserBaseData {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(age, gender, height, weight);
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserBaseData{");
+        sb.append("age=").append(age);
+        sb.append(", gender=").append(gender);
+        sb.append(", height=").append(height);
+        sb.append(", weight=").append(weight);
+        sb.append(", activityLevel=").append(activityLevel);
+        sb.append('}');
+        return sb.toString();
     }
 }
