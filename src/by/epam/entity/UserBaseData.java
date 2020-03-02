@@ -2,6 +2,8 @@ package by.epam.entity;
 
 import by.epam.collections.Gender;
 
+import java.util.Objects;
+
 public class UserBaseData {
     private String name;
     private String surname;
@@ -65,5 +67,23 @@ public class UserBaseData {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserBaseData that = (UserBaseData) o;
+        return age == that.age &&
+                height == that.height &&
+                Double.compare(that.weight, weight) == 0 &&
+                name.equals(that.name) &&
+                surname.equals(that.surname) &&
+                gender == that.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, age, gender, height, weight);
     }
 }
