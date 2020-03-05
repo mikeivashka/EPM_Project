@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <property name="LOG_DIR">logs</property>
+        <property name="ARCHIVE_LOG_DIR">${LOG_DIR}/archive</property>
+        <property name="pattern_file">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{5} - %msg%n</property>
+        <property name="pattern_console">%d{HH:mm:ss.SSS} [%t] %-5level %logger{5} - %msg%n</property>
+    </Properties>
+    <ThresholdFilter level="trace"/>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern_console}"/>
+        </Console>
+        <File name="File1" fileName="logs/text.log" bufferedIO="true">
+            <PatternLayout pattern="${pattern_file}"/>
+        </File>
+        <RollingFile name="FileRolling" fileName="logs/text_rol.log" append="true"
+                     filePattern="logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
+            <PatternLayout pattern="${pattern_file}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <RollingFile name="FileZip" fileName="${LOG_DIR}/text_arch.log" append="true"
+                     filePattern="${ARCHIVE_LOG_DIR}/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log.zip">
+            <PatternLayout pattern="${pattern_file}"/>
+            <BurstFilter level="INFO" rate="16" maxBurst="100"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="15 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="Log_File" level="trace" additivity="false">
+                <AppenderRef ref="File1"/>
+        </Logger>
+        <Root level = "debug">
+            <AppenderRef ref="FileRolling"/>
+            <AppenderRef ref="Console" level="trace"/>
+        </Root>
+    </Loggers>
+</Configuration>
