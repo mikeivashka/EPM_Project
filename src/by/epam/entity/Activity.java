@@ -6,7 +6,17 @@ import java.io.Serializable;
 import java.util.StringJoiner;
 
 public class Activity implements Serializable {
+    private Integer id;
     private TrainingType type;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     private String description;
     private String link;
     private static final long serialVersionUID = 1L;
