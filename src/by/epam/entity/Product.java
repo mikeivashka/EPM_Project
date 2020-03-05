@@ -1,9 +1,10 @@
 package by.epam.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class Product {
+public class Product implements Serializable {
     private String title;
     private int caloriesCapacity;
 

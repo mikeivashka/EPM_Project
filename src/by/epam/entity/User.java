@@ -3,10 +3,11 @@ package by.epam.entity;
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class User {
+public class User implements Serializable {
     private String name;
     private String surname;
     private String email;

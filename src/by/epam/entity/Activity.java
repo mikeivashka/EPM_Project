@@ -2,9 +2,10 @@ package by.epam.entity;
 
 import by.epam.collections.TrainingType;
 
+import java.io.Serializable;
 import java.util.StringJoiner;
 
-public class Activity {
+public class Activity implements Serializable {
     private TrainingType type;
     private String description;
     private String link;

@@ -1,8 +1,9 @@
 package by.epam.entity;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Dish {
+public class Dish implements Serializable {
 
     private String title;
     private Map<Product, Integer> ingredients;
