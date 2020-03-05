@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 public class Product implements Serializable {
     private String title;
     private int caloriesCapacity;
+    private static final long serialVersionUID = 1L;
 
     public Product(String title, int caloriesCapacity) {
         this.title = title;

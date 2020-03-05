@@ -9,6 +9,7 @@ public class Dish implements Serializable {
     private Map<Product, Integer> ingredients;
     private int caloriesCapacity;
     private String recepyLink;
+    private static final long serialVersionUID = 1L;
 
     public Map<Product, Integer> getIngredients() {
         return ingredients;

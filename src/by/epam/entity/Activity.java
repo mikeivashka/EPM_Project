@@ -9,7 +9,7 @@ public class Activity implements Serializable {
     private TrainingType type;
     private String description;
     private String link;
-
+    private static final long serialVersionUID = 1L;
     public TrainingType getType() {
         return type;
     }
