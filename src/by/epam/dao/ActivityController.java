@@ -10,32 +10,42 @@ public class ActivityController extends Controller<Activity, Integer> {
 
     private static final String dir = "data/activity.dat";
 
+
     public ActivityController() {
         super.initialize(dir);
     }
 
     @Override
-    public List<Activity> getAll() {
-        return null;
-    }
-
-    @Override
     public Activity update(Activity entity) {
-        return null;
+
     }
 
     @Override
     public Activity getEntityById(Integer id) {
+        for(Activity activity : data){
+            if(activity.getId().equals(id))return activity;
+        }
         return null;
     }
 
     @Override
     public boolean delete(Integer id) {
+        for(int i=0;i<data.size();i++) {
+            if (data.get(i).getId() == id) {
+                data.remove(i);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean create(Activity entity) {
-        return false;
+    public void create(Activity entity) throws IllegalArgumentException {
+        if(getEntityById(entity.getId()) == null) {
+            data.add(entity);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 }
