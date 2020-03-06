@@ -37,7 +37,7 @@ public abstract class Controller<E, K>{
             inputStream = new ObjectInputStream(new FileInputStream(getDir()));
             log.info(inputStream);
             data = (ArrayList<E>)inputStream.readObject();
-            log.info(data.size()+ "\n" + data.size() + " objects LOADED successfully");
+            log.info( data.size() + " objects LOADED successfully");
             inputStream.close();
         }
         catch (IOException e){
@@ -54,6 +54,7 @@ public abstract class Controller<E, K>{
             if(data.get(i).hashCode() == entity.hashCode()){
                  data.set(i, entity);
                 log.info(data.get(i) + "\nUPDATE SUCCESS" );
+                return entity;
             }
         }
         log.error("UPDATE Failed, missing object to update");

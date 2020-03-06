@@ -14,7 +14,7 @@ public class DataManager {
     static Scanner scan = new Scanner(System.in);
     public static void main(String args[]){
         while(true) {
-            System.out.println("Choose what to manage: \n1.Activities\n2.Dishes\n3.Products\n4.Users\n0.Exit1");
+            System.out.println("Choose what to manage: \n1.Activities\n2.Dishes\n3.Products\n4.Users\n0.Exit");
             int choice = scan.nextInt();
             switch (choice)
             {
@@ -125,8 +125,8 @@ public class DataManager {
                     break;
                 }
                 case 2:{
-                    System.out.println("Enter id to delete: ");
-                    String pTitle = scan.nextLine();
+                    System.out.println("Enter title to delete: ");
+                    String pTitle = scan.next();
                     controller.delete(pTitle);
                     break;
                 }
@@ -196,15 +196,13 @@ public class DataManager {
     }
     private static Dish dishBuilder(){
         Dish ob = new Dish();
-        System.out.println("Title: ");
+        System.out.println("Title: \n");
         ob.setTitle(scan.nextLine());
         System.out.println("Calories:");
         ob.setCaloriesCapacity(scan.nextInt());
         System.out.println("Ingredients: ");
 
-        Map<Product, Integer> tmp = new HashMap<Product, Integer>();
-        System.out.println("Ingredient name:");
-        String mStr = scan.nextLine();
+        Map<Product, Integer> tmp = new HashMap<>();
         System.out.println("Ingredient weight");
         int mGr = scan.nextInt();
         tmp.put(productBuilder(),mGr);
@@ -216,7 +214,7 @@ public class DataManager {
     }
     private static Product productBuilder(){
         System.out.println("Title: ");
-        String pTitle = scan.nextLine();
+        String pTitle = scan.next();
         System.out.println("Calories Capacity: ");
         int pCalories = scan.nextInt();
         Product product = new Product(pTitle, pCalories);

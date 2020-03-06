@@ -35,7 +35,7 @@ public class Product implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title);
+        return title.hashCode();
     }
 
     @Override
