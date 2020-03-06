@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.StringJoiner;
 
 public class Activity implements Serializable {
-    private Integer id;
+    private  Integer id;
     private TrainingType type;
 
     public Integer getId() {

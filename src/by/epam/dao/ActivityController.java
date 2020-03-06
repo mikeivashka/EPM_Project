@@ -17,7 +17,11 @@ public class ActivityController extends Controller<Activity, Integer> {
 
     @Override
     public Activity update(Activity entity) {
-
+        for(Activity a : data){
+            if(a.getId().equals(entity.getId()))a = entity;
+            return a;
+        }
+        return null;
     }
 
     @Override
