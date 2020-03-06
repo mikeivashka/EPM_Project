@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class DataManager {
     static Scanner scan = new Scanner(System.in);
-    public void main(){
+    public static void main(String args[]){
         while(true) {
             System.out.println("Choose what to manage: \n1.Activities\n2.Dishes\n3.Products\n4.Users\n0.Exit");
             int choice = scan.nextInt();
@@ -36,7 +36,7 @@ public class DataManager {
         }
 
     }
-    private void activityManager(){
+    private static void activityManager(){
         ActivityController controller = new ActivityController();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
@@ -61,30 +61,31 @@ public class DataManager {
                     System.out.println(controller.getAll());
                     break;
                 }
-                case 0: main();
+                case 0: main(new String[0]);
                 default: continue;
             }
+            controller.save();
+
         }
 
+    }
+    private static void dishManager(){
 
     }
-    private void dishManager(){
+    private static void productManager(){
 
     }
-    private void productManager(){
+    private static void userManager(){
 
     }
-    private void userManager(){
-
-    }
-    private Activity activityBuilder(){
+    private static Activity activityBuilder(){
         Activity ob = new Activity();
         System.out.println("ID:");
         ob.setId(scan.nextInt());
         System.out.println("Type (POWER or CARDIO)");
         ob.setType(TrainingType.valueOf(scan.next()));
         System.out.println("Description: ");
-        ob.setDescription(scan.nextLine());
+        ob.setDescription(scan.next());
         System.out.println("Link for information: ");
         ob.setLink(scan.next());
         return ob;

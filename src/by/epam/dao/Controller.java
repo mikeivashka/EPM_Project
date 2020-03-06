@@ -10,23 +10,38 @@ import java.util.List;
 
 
 public abstract class Controller<E, K>{
+    {
+        data = new ArrayList<E>();
+    }
     static Logger log = LogManager.getLogger();
     protected ObjectInputStream inputStream;
     protected ObjectOutputStream outputStream;
     protected List<E> data;
 
-
-
-    public void save() throws IOException{
-        outputStream.writeObject(data);
-        log.info(data.size() + getClass().getName() + "objects saved successfully");
-        outputStream.close();
+    public void save(){
+        try{
+            log.info(data);
+            outputStream.writeObject(data);
+            log.info(data.size() + getClass().getName() + "objects saved successfully");
+            outputStream.close();
+        }
+        catch (IOException e){
+            log.error(e);
+        }
     }
 
-    public void load() throws ClassNotFoundException, IOException, ClassCastException{
+    public void load(){
+        try{
         data = (ArrayList<E>) inputStream.readObject();
         log.info(data.size() + " " + getClass().getName() + "objects loaded successfully");
         inputStream.close();
+        }
+        catch (IOException e){
+            log.error(e);
+        }
+        catch (ClassNotFoundException e){
+            log.error(e);
+        }
     }
 
     public  E update(E entity){
@@ -70,12 +85,14 @@ public abstract class Controller<E, K>{
              FileInputStream istream = new FileInputStream(dir)){
             inputStream = new ObjectInputStream(istream);
             outputStream = new ObjectOutputStream(ostream);
+            log.info(inputStream);
+            log.info(outputStream);
         }
         catch (FileNotFoundException e){
-            log.error(e.getStackTrace());
+            log.error(e);
         }
         catch (IOException e){
-            log.error(e.getStackTrace());
+            log.error(e);
         }
     }
 
