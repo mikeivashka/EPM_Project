@@ -9,8 +9,6 @@ import java.util.List;
 public class ActivityController extends Controller<Activity, Integer> {
 
     private static final String dir = "data/activity.dat";
-
-
     public ActivityController() {
         super.initialize(dir);
     }

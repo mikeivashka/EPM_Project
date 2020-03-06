@@ -41,4 +41,7 @@ public abstract class Controller<E, K>{
             log.error(e.getStackTrace());
         }
     }
+    public List<E> getAll(){
+        return data;
+    }
 }
