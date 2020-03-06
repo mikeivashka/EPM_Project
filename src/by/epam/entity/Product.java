@@ -9,6 +9,10 @@ public class Product implements Serializable {
     private int caloriesCapacity;
     private static final long serialVersionUID = 1L;
 
+    public Product(){
+        super();
+    }
+
     public Product(String title, int caloriesCapacity) {
         this.title = title;
         this.caloriesCapacity = caloriesCapacity;

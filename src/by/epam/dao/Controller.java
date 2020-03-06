@@ -64,7 +64,7 @@ public abstract class Controller<E, K>{
         for(int i=0;i<data.size();i++) {
             if (data.get(i).hashCode() == id.hashCode()) {
                 data.remove(i);
-                log.info(id + "object removed successfuly");
+                log.info(id + "object removed successfully");
                 return true;
             }
         }

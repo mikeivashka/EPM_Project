@@ -12,13 +12,16 @@ public class User implements Serializable {
     private String surname;
     private String email;
     private static final long serialVersionUID = 1L;
-    static class UserBaseData {
+    public static class UserBaseData {
         private int age;
         private Gender gender;
         private int height;
         private double weight;
         private ActivityLevel activityLevel;
         //private static final long serialVersionUID = 1L;
+        public UserBaseData(){
+            super();
+        }
         public UserBaseData(int age, Gender gender, int height, double weight, ActivityLevel activityLevel) {
             this.age = age;
             this.gender = gender;
