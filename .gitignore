@@ -1,1 +1,4 @@
 .idea/
+out/
+logs/
+EPM_Project.iml
