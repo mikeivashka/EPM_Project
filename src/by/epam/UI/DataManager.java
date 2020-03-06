@@ -14,7 +14,7 @@ public class DataManager {
     static Scanner scan = new Scanner(System.in);
     public static void main(String args[]){
         while(true) {
-            System.out.println("Choose what to manage: \n1.Activities\n2.Dishes\n3.Products\n4.Users\n0.Exit1");
+            System.out.println("Choose what to manage: \n1.Activities\n2.Dishes\n3.Products\n4.Users\n0.Exit");
             int choice = scan.nextInt();
             switch (choice)
             {
