@@ -10,19 +10,21 @@ import java.util.ArrayList;
 
 
 public abstract class Controller<E, K>{
-    {
-        data = new ArrayList<E>();
-    }
+
     static Logger log = LogManager.getLogger();
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
     private ArrayList<E> data;
 
+    public Controller() {
+        this.data = new ArrayList<>();
+    }
+
     public void save(){
         try{
             outputStream = new ObjectOutputStream(new FileOutputStream(getDir()));
             outputStream.writeObject(data);
-            log.info(data.size() + "objects SAVED successfully");
+            log.info(data.size() + " objects SAVED successfully");
             outputStream.close();
         }
         catch (IOException e){
