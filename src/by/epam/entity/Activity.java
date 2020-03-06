@@ -3,6 +3,7 @@ package by.epam.entity;
 import by.epam.collections.TrainingType;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Activity implements Serializable {
@@ -51,5 +52,21 @@ public class Activity implements Serializable {
                 .add("description='" + description + "'")
                 .add("link='" + link + "'")
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return id.equals(activity.id) &&
+                type == activity.type &&
+                Objects.equals(description, activity.description) &&
+                Objects.equals(link, activity.link);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
