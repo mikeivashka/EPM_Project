@@ -5,7 +5,7 @@ import by.epam.entity.Dish;
 import java.util.List;
 
 public class DishController extends Controller<Dish, String> {
-    private static final String dir = "data/Dish.dat";
+    private static final String dir = "data/dish.dat";
 
     public DishController() {
         super.initialize(dir);
