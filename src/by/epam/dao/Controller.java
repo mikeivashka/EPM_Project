@@ -5,8 +5,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public abstract class Controller<E, K>{
@@ -16,13 +16,12 @@ public abstract class Controller<E, K>{
     static Logger log = LogManager.getLogger();
     protected ObjectInputStream inputStream;
     protected ObjectOutputStream outputStream;
-    protected List<E> data;
+    protected ArrayList<E> data;
 
     public void save(){
         try{
-            log.info(data);
             outputStream.writeObject(data);
-            log.info(data.size() + getClass().getName() + "objects saved successfully");
+            log.info(data.size() + "objects saved successfully");
             outputStream.close();
         }
         catch (IOException e){
@@ -32,16 +31,19 @@ public abstract class Controller<E, K>{
 
     public void load(){
         try{
-        data = (ArrayList<E>) inputStream.readObject();
-        log.info(data.size() + " " + getClass().getName() + "objects loaded successfully");
+        log.info(inputStream);
+        data = (ArrayList<E>)inputStream.readObject();
+        log.info(data.size() + " " + getClass().getName() +" "+ data.size() + " objects loaded successfully");
         inputStream.close();
         }
         catch (IOException e){
             log.error(e);
+            e.printStackTrace();
         }
         catch (ClassNotFoundException e){
             log.error(e);
         }
+
     }
 
     public  E update(E entity){
@@ -81,22 +83,21 @@ public abstract class Controller<E, K>{
     }
 
     protected void initialize(String dir) {
-        try (FileOutputStream ostream = new FileOutputStream(dir);
-             FileInputStream istream = new FileInputStream(dir)){
-            inputStream = new ObjectInputStream(istream);
-            outputStream = new ObjectOutputStream(ostream);
-            log.info(inputStream);
-            log.info(outputStream);
+        try {
+            outputStream = new ObjectOutputStream(new FileOutputStream(dir));
+            inputStream = new ObjectInputStream(new FileInputStream(dir));
         }
         catch (FileNotFoundException e){
             log.error(e);
+            e.printStackTrace();
         }
         catch (IOException e){
             log.error(e);
+            e.printStackTrace();
         }
     }
 
-    public List<E> getAll(){
+    public ArrayList<E> getAll(){
         return data;
     }
 }

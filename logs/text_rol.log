@@ -1,18 +1,28 @@
-2020-03-05 21:07:30 [main] INFO  by.epam.runner.Temp - Test
-2020-03-05 21:11:07 [main] INFO  by.epam.runner.Temp - Test
-2020-03-05 21:30:41 [main] INFO  by.epam.runner.Temp - Test
-2020-03-05 21:33:44 [main] INFO  by.epam.runner.Temp - Test
-2020-03-06 15:29:39 [main] ERROR by.epam.dao.Controller - [Ljava.lang.StackTraceElement;@c88a337
-2020-03-06 15:31:08 [main] ERROR by.epam.dao.Controller - java.io.EOFException
-2020-03-06 15:35:53 [main] ERROR by.epam.dao.Controller - java.io.EOFException
-2020-03-06 15:36:18 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='', link='http://localhost:8080'] successfully added
-2020-03-06 15:36:54 [main] INFO  by.epam.dao.Controller - Activity[type=CARDIO, description='', link='vk.com/'] successfully added
-2020-03-06 15:38:44 [main] ERROR by.epam.dao.Controller - java.io.EOFException
-2020-03-06 15:44:54 [main] ERROR by.epam.dao.Controller - java.io.EOFException
-2020-03-06 15:45:13 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='Тренировка', link='ног'] successfully added
-2020-03-06 15:48:14 [main] ERROR by.epam.dao.Controller - java.io.EOFException
-2020-03-06 15:48:32 [main] INFO  by.epam.dao.Controller - Activity[type=CARDIO, description='Running', link='vk.com/'] successfully added
-2020-03-06 15:49:28 [main] ERROR by.epam.dao.Controller - java.io.EOFException
-2020-03-06 15:49:38 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='aa', link='vk.com'] successfully added
-2020-03-06 15:49:38 [main] INFO  by.epam.dao.Controller - [Activity[type=POWER, description='aa', link='vk.com']]
-2020-03-06 15:51:38 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 16:50:59 [main] INFO  by.epam.dao.Controller - 1by.epam.dao.ActivityControllerobjects saved successfully
+2020-03-06 16:51:01 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@130c12b7
+2020-03-06 16:51:01 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 16:54:03 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@d5b810e
+2020-03-06 16:54:03 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 16:54:12 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='ddddd', link='aaaa'] successfully added
+2020-03-06 16:54:22 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='sssssss', link='aad'] successfully added
+2020-03-06 16:54:23 [main] INFO  by.epam.dao.Controller - 2by.epam.dao.ActivityControllerobjects saved successfully
+2020-03-06 16:54:31 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@506ae4d4
+2020-03-06 16:54:31 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 16:58:40 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@43dac38f
+2020-03-06 16:58:40 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 16:58:48 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='aaa', link='aaa'] successfully added
+2020-03-06 16:58:51 [main] INFO  by.epam.dao.Controller - 1by.epam.dao.ActivityControllerobjects saved successfully
+2020-03-06 16:58:55 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@48aca48b
+2020-03-06 16:58:55 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 17:32:06 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@54bff557
+2020-03-06 17:32:06 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 17:32:43 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='sss', link='ssss'] successfully added
+2020-03-06 17:32:53 [main] INFO  by.epam.dao.Controller - 1by.epam.dao.ActivityControllerobjects saved successfully
+2020-03-06 17:33:06 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@593aaf41
+2020-03-06 17:33:06 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 17:47:57 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@1de76cc7
+2020-03-06 17:47:57 [main] ERROR by.epam.dao.Controller - java.io.EOFException
+2020-03-06 17:48:09 [main] INFO  by.epam.dao.Controller - Activity[type=POWER, description='ssss', link='sssssss'] successfully added
+2020-03-06 17:48:11 [main] INFO  by.epam.dao.Controller - 1by.epam.dao.ActivityControllerobjects saved successfully
+2020-03-06 17:48:13 [main] INFO  by.epam.dao.Controller - java.io.ObjectInputStream@72e5a8e
+2020-03-06 17:48:13 [main] ERROR by.epam.dao.Controller - java.io.EOFException

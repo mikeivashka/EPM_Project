@@ -34,7 +34,7 @@ public class DataManager {
                     userManager();
                     break;
                 }
-                case 0: return;
+                case 0: System.exit(0);
                 default: continue;
             }
         }
@@ -42,6 +42,7 @@ public class DataManager {
     }
     private static void activityManager(){
         ActivityController controller = new ActivityController();
+        controller.load();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
@@ -65,16 +66,21 @@ public class DataManager {
                     System.out.println(controller.getAll());
                     break;
                 }
-                case 0: main(new String[0]);
+                case 0: {
+                    controller.save();
+                    main(new String[0]);
+                };
                 default: continue;
             }
-            controller.save();
+
+
 
         }
 
     }
     private static void dishManager(){
         DishController controller = new DishController();
+        controller.load();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
@@ -98,16 +104,20 @@ public class DataManager {
                     System.out.println(controller.getAll());
                     break;
                 }
-                case 0: main(new String[0]);
+                case 0: {
+                    controller.save();
+                    main(new String[0]);
+                }
                 default: continue;
             }
-            controller.save();
+
 
         }
 
     }
     private static void productManager(){
         ProductController controller = new ProductController();
+        controller.load();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
@@ -131,10 +141,13 @@ public class DataManager {
                     System.out.println(controller.getAll());
                     break;
                 }
-                case 0: main(new String[0]);
+                case 0: {
+                    controller.save();
+                    main(new String[0]);
+                }
                 default: continue;
             }
-            controller.save();
+
 
         }
     }
@@ -163,10 +176,12 @@ public class DataManager {
                     System.out.println(controller.getAll());
                     break;
                 }
-                case 0: main(new String[0]);
+                case 0: {
+                    controller.save();
+                    main(new String[0]);}
                 default: continue;
             }
-            controller.save();
+
 
         }
     }
