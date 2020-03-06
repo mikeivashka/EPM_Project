@@ -14,14 +14,15 @@ public abstract class Controller<E, K>{
         data = new ArrayList<E>();
     }
     static Logger log = LogManager.getLogger();
-    protected ObjectInputStream inputStream;
-    protected ObjectOutputStream outputStream;
-    protected ArrayList<E> data;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
+    private ArrayList<E> data;
 
     public void save(){
         try{
+            outputStream = new ObjectOutputStream(new FileOutputStream(getDir()));
             outputStream.writeObject(data);
-            log.info(data.size() + "objects saved successfully");
+            log.info(data.size() + "objects SAVED successfully");
             outputStream.close();
         }
         catch (IOException e){
@@ -31,10 +32,11 @@ public abstract class Controller<E, K>{
 
     public void load(){
         try{
-        log.info(inputStream);
-        data = (ArrayList<E>)inputStream.readObject();
-        log.info(data.size() + " " + getClass().getName() +" "+ data.size() + " objects loaded successfully");
-        inputStream.close();
+            inputStream = new ObjectInputStream(new FileInputStream(getDir()));
+            log.info(inputStream);
+            data = (ArrayList<E>)inputStream.readObject();
+            log.info(data.size()+ "\n" + data.size() + " objects LOADED successfully");
+            inputStream.close();
         }
         catch (IOException e){
             log.error(e);
@@ -43,23 +45,31 @@ public abstract class Controller<E, K>{
         catch (ClassNotFoundException e){
             log.error(e);
         }
-
     }
 
     public  E update(E entity){
-        for(E obj: data){
-            if(obj.hashCode() == entity.hashCode())obj = entity;
-            log.info(entity + " successfully updated" );
-            return obj;
+        for(int i=0;i<data.size()-1; i++){
+            if(data.get(i).hashCode() == entity.hashCode()){
+                 data.set(i, entity);
+                log.info(data.get(i) + "\nUPDATE SUCCESS" );
+            }
         }
-        return null;
+        log.error("UPDATE Failed, missing object to update");
+        return entity;
     }
 
     public  E getEntityByKey(K key){
-        for(E obj : data){
-            if(obj.hashCode() == key.hashCode())return obj;
+        try {
+            for(E obj : data) {
+                if (obj.hashCode() == key.hashCode()) return obj;
+            }
+            throw new IllegalArgumentException();
         }
-        return null;
+        catch (IllegalArgumentException e)
+        {
+            log.error("OBJECT NOT FOUND EXCEPTION");
+        }
+        return data.get(0);
     }
 
     public  boolean delete(K id){
@@ -73,31 +83,14 @@ public abstract class Controller<E, K>{
         return false;
     }
 
-    public  void create(E entity) throws IllegalArgumentException{
-        for(E obj : data){
-            if(obj.hashCode() == entity.hashCode())throw new IllegalArgumentException();
-        }
+    public  void create(E entity){
         data.add(entity);
-        log.info(entity + " successfully added");
-
-    }
-
-    protected void initialize(String dir) {
-        try {
-            outputStream = new ObjectOutputStream(new FileOutputStream(dir));
-            inputStream = new ObjectInputStream(new FileInputStream(dir));
-        }
-        catch (FileNotFoundException e){
-            log.error(e);
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            log.error(e);
-            e.printStackTrace();
-        }
+        log.info(entity + " added");
     }
 
     public ArrayList<E> getAll(){
         return data;
     }
+
+    public abstract String getDir();
 }

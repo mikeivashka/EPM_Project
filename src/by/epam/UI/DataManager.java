@@ -73,8 +73,6 @@ public class DataManager {
                 default: continue;
             }
 
-
-
         }
 
     }
@@ -110,7 +108,6 @@ public class DataManager {
                 }
                 default: continue;
             }
-
 
         }
 
@@ -189,7 +186,7 @@ public class DataManager {
         Activity ob = new Activity();
         System.out.println("ID:");
         ob.setId(scan.nextInt());
-        System.out.println("Type (POWER or CARDIO)");
+        System.out.println("Type (POWER or CARDIO): ");
         ob.setType(TrainingType.valueOf(scan.next()));
         System.out.println("Description: ");
         ob.setDescription(scan.next());

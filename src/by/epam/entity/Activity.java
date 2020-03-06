@@ -45,11 +45,11 @@ public class Activity implements Serializable {
         this.link = link;
     }
 
-
     @Override
     public String toString() {
         return new StringJoiner(", ", Activity.class.getSimpleName() + "[", "]")
-                .add("type=" + type.name())
+                .add("id=" + id)
+                .add("type=" + type)
                 .add("description='" + description + "'")
                 .add("link='" + link + "'")
                 .toString();
