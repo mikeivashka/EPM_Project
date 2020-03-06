@@ -31,7 +31,7 @@ public class Product implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, caloriesCapacity);
+        return Objects.hash(title);
     }
 
     @Override

@@ -9,6 +9,9 @@ import java.util.StringJoiner;
 public class Activity implements Serializable {
     private  Integer id;
     private TrainingType type;
+    private String description;
+    private String link;
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -18,9 +21,6 @@ public class Activity implements Serializable {
         this.id = id;
     }
 
-    private String description;
-    private String link;
-    private static final long serialVersionUID = 1L;
     public TrainingType getType() {
         return type;
     }
@@ -44,6 +44,7 @@ public class Activity implements Serializable {
     public void setLink(String link) {
         this.link = link;
     }
+
 
     @Override
     public String toString() {
