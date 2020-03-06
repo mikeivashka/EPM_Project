@@ -15,6 +15,8 @@ public abstract class Controller<E, K>{
     protected ObjectOutputStream outputStream;
     protected List<E> data;
 
+
+
     public void save() throws IOException{
         outputStream.writeObject(data);
         log.info(data.size() + getClass().getName() + "objects saved successfully");
