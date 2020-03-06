@@ -1,2 +1,0 @@
-2020-03-06 19:59:27 [main] ERROR by.epam.dao.Controller - java.io.FileNotFoundException: data/activity.dat (No such file or directory)
-2020-03-06 19:59:27 [main] INFO  by.epam.dao.Controller - null
