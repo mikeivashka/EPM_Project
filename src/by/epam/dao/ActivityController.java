@@ -17,6 +17,7 @@ public class ActivityController extends Controller<Activity, Integer> {
     public Activity update(Activity entity) {
         for(Activity a : data){
             if(a.getId().equals(entity.getId()))a = entity;
+            log.info(entity + " successfully updated" );
             return a;
         }
         return null;
@@ -35,6 +36,7 @@ public class ActivityController extends Controller<Activity, Integer> {
         for(int i=0;i<data.size();i++) {
             if (data.get(i).getId() == id) {
                 data.remove(i);
+                log.info(id + "Activity successfully deleted");
                 return true;
             }
         }
@@ -45,8 +47,10 @@ public class ActivityController extends Controller<Activity, Integer> {
     public void create(Activity entity) throws IllegalArgumentException {
         if(getEntityById(entity.getId()) == null) {
             data.add(entity);
+            log.info(entity + " successfully added");
         }
         else {
+            log.info(entity + " failed to add");
             throw new IllegalArgumentException();
         }
     }
