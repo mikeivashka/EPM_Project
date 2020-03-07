@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-public class Dish implements Serializable {
+public class Dish extends Entity {
 
     private String title;
     private Map<Product, Integer> ingredients;
     private int caloriesCapacity;
     private String recepyLink;
     private static final long serialVersionUID = 1L;
+
+    public Dish() {
+    }
 
     @Override
     public boolean equals(Object o) {

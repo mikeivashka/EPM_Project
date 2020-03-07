@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class Product implements Serializable {
+public class Product extends Entity {
     private String title;
     private int caloriesCapacity;
     private static final long serialVersionUID = 1L;

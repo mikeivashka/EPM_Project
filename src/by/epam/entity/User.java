@@ -7,11 +7,15 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class User implements Serializable {
+public class User extends Entity {
     private String name;
     private String surname;
     private String email;
     private static final long serialVersionUID = 1L;
+
+    public User() {
+    }
+
     public static class UserBaseData {
         private int age;
         private Gender gender;
@@ -29,6 +33,7 @@ public class User implements Serializable {
             this.weight = weight;
             this.activityLevel = activityLevel;
         }
+
 
         public ActivityLevel getActivityLevel() {
             return activityLevel;

@@ -6,12 +6,15 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class Activity implements Serializable {
+public class Activity extends Entity {
     private  Integer id;
     private TrainingType type;
     private String description;
     private String link;
     private static final long serialVersionUID = 1L;
+
+    public Activity() {
+    }
 
     public Integer getId() {
         return id;
