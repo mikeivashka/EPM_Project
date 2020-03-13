@@ -2,7 +2,7 @@ package by.epam.dao;
 
 import by.epam.entity.Activity;
 
-public class ActivityController extends Controller<Activity, Integer> {
+public class ActivityDao extends Dao<Activity, Integer> {
     private static final String dir = "data/activity.dat";
 
     @Override

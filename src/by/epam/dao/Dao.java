@@ -9,14 +9,14 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
-public abstract class Controller<E, K>{
+public abstract class Dao<E, K>{
 
     static Logger log = LogManager.getLogger();
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
     private ArrayList<E> data;
 
-    public Controller() {
+    public Dao() {
         this.data = new ArrayList<>();
     }
 

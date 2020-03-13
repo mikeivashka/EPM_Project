@@ -1,4 +1,4 @@
-package by.epam.UI;
+package by.epam.view;
 
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.TrainingType;
@@ -41,33 +41,33 @@ public class DataManager {
 
     }
     private static void activityManager(){
-        ActivityController controller = new ActivityController();
-        controller.load();
+        ActivityDao dao = new ActivityDao();
+        dao.load();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
             switch (choice)
             {
                 case 1:{
-                    controller.create(activityBuilder());
+                    dao.create(activityBuilder());
                     break;
                 }
                 case 2:{
                     System.out.println("Enter id to delete: ");
                     int id = scan.nextInt();
-                    controller.delete(id);
+                    dao.delete(id);
                     break;
                 }
                 case 3:{
-                    controller.update(activityBuilder());
+                    dao.update(activityBuilder());
                     break;
                 }
                 case 4:{
-                    System.out.println(controller.getAll());
+                    System.out.println(dao.getAll());
                     break;
                 }
                 case 0: {
-                    controller.save();
+                    dao.save();
                     main(new String[0]);
                 };
                 default: continue;
@@ -77,33 +77,33 @@ public class DataManager {
 
     }
     private static void dishManager(){
-        DishController controller = new DishController();
-        controller.load();
+        DishDao dao = new DishDao();
+        dao.load();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
             switch (choice)
             {
                 case 1:{
-                    controller.create(dishBuilder());
+                    dao.create(dishBuilder());
                     break;
                 }
                 case 2:{
                     System.out.println("Enter id to delete: ");
                     String dTitle = scan.nextLine();
-                    controller.delete(dTitle);
+                    dao.delete(dTitle);
                     break;
                 }
                 case 3:{
-                    controller.update(dishBuilder());
+                    dao.update(dishBuilder());
                     break;
                 }
                 case 4:{
-                    System.out.println(controller.getAll());
+                    System.out.println(dao.getAll());
                     break;
                 }
                 case 0: {
-                    controller.save();
+                    dao.save();
                     main(new String[0]);
                 }
                 default: continue;
@@ -113,33 +113,33 @@ public class DataManager {
 
     }
     private static void productManager(){
-        ProductController controller = new ProductController();
-        controller.load();
+        ProductDao dao = new ProductDao();
+        dao.load();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
             switch (choice)
             {
                 case 1:{
-                    controller.create(productBuilder());
+                    dao.create(productBuilder());
                     break;
                 }
                 case 2:{
                     System.out.println("Enter title to delete: ");
                     String pTitle = scan.next();
-                    controller.delete(pTitle);
+                    dao.delete(pTitle);
                     break;
                 }
                 case 3:{
-                    controller.update(productBuilder());
+                    dao.update(productBuilder());
                     break;
                 }
                 case 4:{
-                    System.out.println(controller.getAll());
+                    System.out.println(dao.getAll());
                     break;
                 }
                 case 0: {
-                    controller.save();
+                    dao.save();
                     main(new String[0]);
                 }
                 default: continue;
@@ -149,32 +149,32 @@ public class DataManager {
         }
     }
     private static void userManager(){
-        UserController controller = new UserController();
+        UserDao dao = new UserDao();
         while(true) {
             System.out.println("Choose what to do: \n1.Add\n2.Delete\n3.Update\n4.Show All\n0.Back");
             int choice = scan.nextInt();
             switch (choice)
             {
                 case 1:{
-                    controller.create(userBuilder());
+                    dao.create(userBuilder());
                     break;
                 }
                 case 2:{
                     System.out.println("Enter Email to delete: ");
                     String pEmail = scan.nextLine();
-                    controller.delete(pEmail);
+                    dao.delete(pEmail);
                     break;
                 }
                 case 3:{
-                    controller.update(userBuilder());
+                    dao.update(userBuilder());
                     break;
                 }
                 case 4:{
-                    System.out.println(controller.getAll());
+                    System.out.println(dao.getAll());
                     break;
                 }
                 case 0: {
-                    controller.save();
+                    dao.save();
                     main(new String[0]);}
                 default: continue;
             }
