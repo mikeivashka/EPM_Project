@@ -3,10 +3,9 @@ package by.epam.view;
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.TrainingType;
 import by.epam.dao.*;
-import by.epam.entity.Activity;
-import by.epam.entity.Dish;
-import by.epam.entity.Product;
+import by.epam.entity.*;
 import by.epam.entity.User;
+import by.epam.entity.BaseUser;
 
 import java.util.*;
 
@@ -221,7 +220,7 @@ public class DataManager {
         return product;
     }
     private static User userBuilder(){
-        User user = new User();
+        BaseUser user = new BaseUser();
         System.out.println("Email: ");
         user.setEmail(scan.nextLine());
         System.out.println("Name: ");
@@ -229,7 +228,7 @@ public class DataManager {
         System.out.println("Surname: ");
         user.setSurname(scan.nextLine());
         System.out.println("Activity level (NONE, SEDENTARY, LIGHTLY_ACTIVE, MODERATELY_ACTIVE, VERY_ACTIVE)");
-        new User.UserBaseData().setActivityLevel(ActivityLevel.valueOf(scan.next()));
+        user.setActivityLevel(ActivityLevel.valueOf(scan.next()));
         return user;
     }
 }

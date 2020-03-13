@@ -5,7 +5,7 @@ import by.epam.collections.Gender;
 
 import java.util.Objects;
 
-public class BaseUser {
+public class BaseUser extends User{
     private int age;
     private Gender gender;
     private int height;
