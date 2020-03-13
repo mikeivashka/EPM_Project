@@ -77,6 +77,7 @@ public abstract class Controller<E, K>{
 
     public  boolean delete(K id){
         for(int i=0;i<data.size();i++) {
+            log.info(data.get(i).hashCode());
             if (data.get(i).hashCode() == id.hashCode()) {
                 data.remove(i);
                 log.info(id + "object removed successfully");
