@@ -28,7 +28,7 @@ public class Dish extends Entity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title);
+        return title.hashCode();
     }
 
     public Map<Product, Integer> getIngredients() {
