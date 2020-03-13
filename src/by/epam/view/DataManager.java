@@ -181,18 +181,20 @@ public class DataManager {
 
         }
     }
+    //не работает update
     private static Activity activityBuilder(){
         Activity ob = new Activity();
         System.out.println("ID:");
         ob.setId(scan.nextInt());
         System.out.println("Type (POWER or CARDIO): ");
-        ob.setType(TrainingType.valueOf(scan.next()));
+        ob.setType(TrainingType.valueOf(scan.next().toUpperCase()));
         System.out.println("Description: ");
         ob.setDescription(scan.next());
         System.out.println("Link for information: ");
         ob.setLink(scan.next());
         return ob;
     }
+    //не работает вообще
     private static Dish dishBuilder(){
         Dish ob = new Dish();
         System.out.println("Title: \n");
@@ -211,6 +213,7 @@ public class DataManager {
         ob.setRecepyLink(scan.nextLine());
         return ob;
     }
+    //не работает update
     private static Product productBuilder(){
         System.out.println("Title: ");
         String pTitle = scan.next();
@@ -219,6 +222,7 @@ public class DataManager {
         Product product = new Product(pTitle, pCalories);
         return product;
     }
+    //работает некорректно
     private static User userBuilder(){
         BaseUser user = new BaseUser();
         System.out.println("Email: ");
@@ -228,7 +232,7 @@ public class DataManager {
         System.out.println("Surname: ");
         user.setSurname(scan.nextLine());
         System.out.println("Activity level (NONE, SEDENTARY, LIGHTLY_ACTIVE, MODERATELY_ACTIVE, VERY_ACTIVE)");
-        user.setActivityLevel(ActivityLevel.valueOf(scan.next()));
+        user.setActivityLevel(ActivityLevel.valueOf(scan.next().toUpperCase()));
         return user;
     }
 }
