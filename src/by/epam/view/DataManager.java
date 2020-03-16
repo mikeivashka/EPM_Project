@@ -198,8 +198,8 @@ public class DataManager {
     //не работает вообще
     private static Dish dishBuilder(){
         Dish ob = new Dish();
-        System.out.println("Title: \n");
-        ob.setTitle(scan.nextLine());
+        System.out.println("Title: ");
+        ob.setTitle(scan.next());
         System.out.println("Calories:");
         ob.setCaloriesCapacity(scan.nextInt());
         System.out.println("Ingredients: ");
@@ -209,9 +209,8 @@ public class DataManager {
         int mGr = scan.nextInt();
         tmp.put(productBuilder(),mGr);
         ob.setIngredients(tmp);
-
         System.out.println("Recepy Link:");
-        ob.setRecepyLink(scan.nextLine());
+        ob.setRecepyLink(scan.next());
         return ob;
     }
     //не работает update

@@ -3,6 +3,7 @@ package by.epam.entity;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Dish extends Entity {
 
@@ -63,4 +64,13 @@ public class Dish extends Entity {
         this.title = title;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Dish.class.getSimpleName() + "[", "]")
+                .add("title='" + title + "'")
+                .add("ingredients=" + ingredients)
+                .add("caloriesCapacity=" + caloriesCapacity)
+                .add("recepyLink='" + recepyLink + "'")
+                .toString();
+    }
 }
