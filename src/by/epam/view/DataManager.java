@@ -7,6 +7,7 @@ import by.epam.entity.*;
 import by.epam.entity.User;
 import by.epam.entity.BaseUser;
 
+import java.io.IOException;
 import java.util.*;
 
 public class DataManager {
