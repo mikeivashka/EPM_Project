@@ -182,7 +182,7 @@ public class DataManager {
 
         }
     }
-    //не работает update
+    //
     private static Activity activityBuilder(){
         Activity ob = new Activity();
         System.out.println("ID:");
@@ -195,25 +195,39 @@ public class DataManager {
         ob.setLink(scan.next());
         return ob;
     }
-    //не работает вообще
+    //
     private static Dish dishBuilder(){
         Dish ob = new Dish();
-        System.out.println("Title: ");
+        System.out.println("dish title: ");
         ob.setTitle(scan.next());
-        System.out.println("Calories:");
+        System.out.println("dish calories per 100g:");
         ob.setCaloriesCapacity(scan.nextInt());
-        System.out.println("Ingredients: ");
-
+        System.out.println("Ok, lets input ingredients ");
         Map<Product, Integer> tmp = new HashMap<>();
-        System.out.println("Ingredient weight");
-        int mGr = scan.nextInt();
-        tmp.put(productBuilder(),mGr);
-        ob.setIngredients(tmp);
+
+        menu:
+            while(true){
+                System.out.println("1. Input ingredient\n0. Exit");
+                int choice = scan.nextInt();
+                System.out.println("Ingredients already included");
+                System.out.println(ob.getIngredients());
+                switch (choice){
+                    case 1:
+                        System.out.println("Ingredient weight");
+                        int mGr = scan.nextInt();
+                        tmp.put(productBuilder(),mGr);
+                        ob.setIngredients(tmp);
+                        break;
+                    case 0:
+                        break menu;
+                    default:continue;
+                }
+            }
         System.out.println("Recepy Link:");
         ob.setRecepyLink(scan.next());
         return ob;
     }
-    //не работает update
+    //
     private static Product productBuilder(){
         System.out.println("Title: ");
         String pTitle = scan.next();
@@ -222,7 +236,7 @@ public class DataManager {
         Product product = new Product(pTitle, pCalories);
         return product;
     }
-    //работает некорректно
+    //
     private static User userBuilder(){
         BaseUser user = new BaseUser();
         System.out.println("Email: ");
