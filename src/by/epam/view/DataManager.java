@@ -220,7 +220,7 @@ public class DataManager {
                         break;
                     case 0:
                         break menu;
-                    default:continue;
+                    default: continue;
                 }
             }
         System.out.println("Recepy Link:");
