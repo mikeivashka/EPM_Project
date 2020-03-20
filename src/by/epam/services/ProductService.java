@@ -5,10 +5,13 @@ import by.epam.entity.Product;
 
 import java.net.Inet4Address;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProductService{
-    public boolean add(String title, String caloriesCapacity){
+    private static ProductDao dao;
+
+    public static boolean add(String title, String caloriesCapacity){
         Product product = new Product();
         product.setTitle(title);
         try{
@@ -17,8 +20,30 @@ public class ProductService{
         catch (NumberFormatException e){
             return false;
         }
-        ProductDao dao = new ProductDao();
         dao.create(product);
         return true;
     }
+
+    public static boolean update(String title, String caloriesCapacity){
+        Product product = new Product();
+        product.setTitle(title);
+        try{
+            Integer capacity = Integer.parseInt(caloriesCapacity);
+        }
+        catch (NumberFormatException e){
+            return false;
+        }
+        dao.update(product);
+        return true;
+    }
+
+    public static boolean delete(String title){
+        return dao.delete(title);
+    }
+
+    public static ArrayList<Product> getAll(){
+        return dao.getAll();
+    }
+
+
 }
