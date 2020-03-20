@@ -14,6 +14,7 @@ public class Dish extends Entity {
     private static final long serialVersionUID = 1L;
 
     public Dish() {
+        super();
     }
 
     @Override
