@@ -237,16 +237,17 @@ public class DataManager {
         return product;
     }
     //
-    private static User userBuilder(){
+    private static BaseUser userBuilder(){
         BaseUser user = new BaseUser();
         System.out.println("Email: ");
-        user.setEmail(scan.nextLine());
+        user.setEmail(scan.next());
         System.out.println("Name: ");
-        user.setName(scan.nextLine());
+        user.setName(scan.next());
         System.out.println("Surname: ");
-        user.setSurname(scan.nextLine());
+        user.setSurname(scan.next());
         System.out.println("Activity level (NONE, SEDENTARY, LIGHTLY_ACTIVE, MODERATELY_ACTIVE, VERY_ACTIVE)");
         user.setActivityLevel(ActivityLevel.valueOf(scan.next().toUpperCase()));
+        user.setAge(scan.nextInt());
         return user;
     }
 }
