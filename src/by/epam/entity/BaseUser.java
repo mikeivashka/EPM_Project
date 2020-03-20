@@ -3,8 +3,6 @@ package by.epam.entity;
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
 
-import java.util.Objects;
-
 public class BaseUser extends User{
     private int age;
     private Gender gender;
