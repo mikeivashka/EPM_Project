@@ -24,6 +24,14 @@ public class Product extends Entity {
         return caloriesCapacity;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCaloriesCapacity(int caloriesCapacity) {
+        this.caloriesCapacity = caloriesCapacity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
