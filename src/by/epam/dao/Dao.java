@@ -34,6 +34,7 @@ public abstract class Dao<E>{
     }
 
     public ArrayList<E> load(){
+
         try{
             inputStream = new ObjectInputStream(new FileInputStream(getDir()));
             log.info(inputStream);
@@ -43,9 +44,11 @@ public abstract class Dao<E>{
         }
         catch (IOException e){
             log.error(e);
+            return new ArrayList();
         }
         catch (ClassNotFoundException e){
             log.error(e);
+            return new ArrayList();
         }
         finally {
             try {
