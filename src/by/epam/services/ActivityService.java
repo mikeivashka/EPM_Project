@@ -9,7 +9,7 @@ import by.epam.entity.Dish;
 
 import java.util.ArrayList;
 
-public class ActivityService extends Service<Activity, String, Dao<Activity, String>>{
+public class ActivityService extends Service<Activity, Integer, ActivityDao>{
 
     private Activity create(Integer id, TrainingType type, String description, String link){
         Activity result = new Activity();
@@ -21,59 +21,24 @@ public class ActivityService extends Service<Activity, String, Dao<Activity, Str
     }
 
     public boolean add(Integer id, TrainingType type, String description, String link){
-        /*Integer parsedId;
-        TrainingType parsedType;
-        try{
-            parsedId = Integer.parseInt(id);
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
-        try{
-            parsedType = TrainingType.valueOf(type.toUpperCase());
-        }catch(EnumConstantNotPresentException e){
-            return false;
-        }*/
-
-        //this.data.add(create(parsedId, parsedType, description, link));
-
-        this.data.add(create(id,type,description,link));
-        return true;
+        return data.add(this.create(id,type,description,link));
     }
 
-    public boolean update(String id, String type, String description, String link){
-        Activity ob = new Activity();
-        Integer obId;
-        try{
-            obId = Integer.parseInt(id);
+    public boolean update(Integer id, TrainingType type, String description, String link){
+
+        Integer index = this.getIndexByKey(id);
+        if(index != -1){
+            data.set(index, create(id,type,description,link));
+            return true;
         }
-        catch (NumberFormatException e){
-            return false;
-        }
-        try{
-            ob.setType(TrainingType.valueOf(type.toUpperCase()));
-        }catch(EnumConstantNotPresentException e){
-            return false;
-        }
-        ob.setDescription(description);
-        ob.setLink(link);
-        dao.update(ob);
-        return true;
+        return false;
     }
 
-    public static boolean delete(String id){
-        Integer obId;
-        try{
-            obId = Integer.parseInt(id);
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
-        return dao.delete(obId);
+    public boolean delete(Integer id){
+        return dao.delete(id);
     }
 
-    public static ArrayList<Activity> getAll(){
-
+    public ArrayList<Activity> getAll(){
         return dao.getAll();
     }
 }
