@@ -21,9 +21,12 @@ public class DishService extends Service<Dish, String, DishDao>{
         return data.add(this.create(title, caloriesCapacity, link, products));
     }
 
-    public static boolean update(String title, Integer caloriesCapacity, String link, HashMap<Product, Integer> products){
-        data.
-        return true;
+    public boolean update(String title, Integer caloriesCapacity, String link, HashMap<Product, Integer> products){
+        Integer index = this.getIndexByKey(title);
+        if(index!= -1){
+            data.set(index, create(title, caloriesCapacity, link, products));
+        }
+        else return false;
     }
 
     public static boolean delete(String title){
