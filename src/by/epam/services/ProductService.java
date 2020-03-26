@@ -8,42 +8,37 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProductService{
-    private static ProductDao dao;
-
-    public static boolean add(String title, String caloriesCapacity){
-        Product product = new Product();
-        product.setTitle(title);
-        try{
-        Integer capacity = Integer.parseInt(caloriesCapacity);
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
-        dao.create(product);
-        return true;
+public class ProductService extends Service<Product, String, ProductDao>{
+    private Product create(String title, Integer caloriesCapacity){
+        Product ob = new Product();
+        ob.setTitle(title);
+        ob.setCaloriesCapacity(caloriesCapacity);
+        return ob;
     }
 
-    public static boolean update(String title, String caloriesCapacity){
-        Product product = new Product();
-        product.setTitle(title);
-        try{
-            Integer capacity = Integer.parseInt(caloriesCapacity);
+    public boolean add(String title, Integer caloriesCapacity){
+        return data.add(this.create(title, caloriesCapacity));
+    }
+
+    public boolean update(String title, Integer caloriesCapacity){
+        Integer index = getIndexByKey(title);
+        if(index != -1){
+            data.set(index, create(title, caloriesCapacity));
+            return true;
         }
-        catch (NumberFormatException e){
-            return false;
+        return false;
+    }
+
+    public boolean delete(String title){
+        Integer index = getIndexByKey(title);
+        if(index != -1){
+            data.remove(index);
+            return true;
         }
-        dao.update(product);
-        return true;
+        return false;
     }
 
-    public static boolean delete(String title){
-        return dao.delete(title);
+    public ArrayList<Product> getAll(){
+        return data;
     }
-
-    public static ArrayList<Product> getAll(){
-        return dao.getAll();
-    }
-
-
 }

@@ -23,17 +23,19 @@ public class DishService extends Service<Dish, String, DishDao>{
 
     public boolean update(String title, Integer caloriesCapacity, String link, HashMap<Product, Integer> products){
         Integer index = this.getIndexByKey(title);
-        if(index!= -1){
-            data.set(index, create(title, caloriesCapacity, link, products));
-        }
+        if(index!= -1)data.set(index, create(title, caloriesCapacity, link, products));
         else return false;
+        return true;
     }
 
-    public static boolean delete(String title){
-        return dao.delete(title);
+    public boolean delete(String title){
+        Integer index = this.getIndexByKey(title);
+        if(index != -1)data.remove(index);
+        else return false;
+        return true;
     }
 
-    public static ArrayList<Dish> getAll(){
-        return dao.getAll();
+    public ArrayList<Dish> getAll(){
+        return data;
     }
 }
