@@ -20,8 +20,8 @@ public class ActivityService extends Service<Activity, String, Dao<Activity, Str
         return result;
     }
 
-    public boolean add(String id, String type, String description, String link){
-        Integer parsedId;
+    public boolean add(Integer id, TrainingType type, String description, String link){
+        /*Integer parsedId;
         TrainingType parsedType;
         try{
             parsedId = Integer.parseInt(id);
@@ -33,9 +33,11 @@ public class ActivityService extends Service<Activity, String, Dao<Activity, Str
             parsedType = TrainingType.valueOf(type.toUpperCase());
         }catch(EnumConstantNotPresentException e){
             return false;
-        }
+        }*/
 
-        this.data.add(create(parsedId, parsedType, description, link));
+        //this.data.add(create(parsedId, parsedType, description, link));
+
+        this.data.add(create(id,type,description,link));
         return true;
     }
 
@@ -71,6 +73,7 @@ public class ActivityService extends Service<Activity, String, Dao<Activity, Str
     }
 
     public static ArrayList<Activity> getAll(){
+
         return dao.getAll();
     }
 }
