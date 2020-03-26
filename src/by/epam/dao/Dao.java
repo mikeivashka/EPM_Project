@@ -48,52 +48,5 @@ public abstract class Dao<E, K>{
         }
     }
 
-    public  E update(E entity){
-        for(int i=0;i<data.size()-1; i++){
-            if(data.get(i).hashCode() == entity.hashCode()){
-                 data.set(i, entity);
-                log.info(data.get(i) + "\nUPDATE SUCCESS" );
-                return entity;
-            }
-        }
-        log.error("UPDATE Failed, missing object to update");
-        return entity;
-    }
-
-    public  E getEntityByKey(K key){
-        try {
-            for(E obj : data) {
-                if (obj.hashCode() == key.hashCode()) return obj;
-            }
-            throw new IllegalArgumentException();
-        }
-        catch (IllegalArgumentException e)
-        {
-            log.error("OBJECT NOT FOUND EXCEPTION");
-        }
-        return data.get(0);
-    }
-
-    public  boolean delete(K id){
-        for(int i=0;i<data.size();i++) {
-            log.info(data.get(i).hashCode());
-            if (data.get(i).hashCode() == id.hashCode()) {
-                data.remove(i);
-                log.info(id + "object removed successfully");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public  void create(E entity){
-        data.add(entity);
-        log.info(entity + " added");
-    }
-
-    public ArrayList<E> getAll(){
-        return data;
-    }
-
     public abstract String getDir();
 }

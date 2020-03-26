@@ -8,10 +8,15 @@ import java.util.ArrayList;
 
 public abstract class UserService extends Service<User, String, UserDao> {
     public boolean delete(String email){
-        return dao.delete(email);
+        Integer index = getIndexByKey(email);
+        if(index != -1){
+            data.remove(index);
+            return true;
+        }
+        else return false;
     }
 
     public ArrayList<User> getAll(){
-        return dao.getAll();
+        return data;
     }
 }
