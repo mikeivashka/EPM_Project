@@ -24,4 +24,17 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E,KEY>> {
         }
         return data.get(0);
     }
+    public Integer getIndexByKey(KEY key){
+        try {
+            for(int i=0; i<data.size()-1;i++) {
+                if (data.get(i).hashCode() == key.hashCode()) return i;
+            }
+            throw new IllegalArgumentException();
+        }
+        catch (IllegalArgumentException e)
+        {
+            log.error("OBJECT NOT FOUND EXCEPTION");
+        }
+        return -1;
+    }
 }

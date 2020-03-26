@@ -21,20 +21,8 @@ public class DishService extends Service<Dish, String, DishDao>{
         return data.add(this.create(title, caloriesCapacity, link, products));
     }
 
-    public static boolean update(String title, String caloriesCapacity, String link, HashMap<Product, Integer> products){
-        Dish dish = new Dish();
-        dish.setTitle(title);
-        Integer capacity;
-        try{
-            capacity = Integer.parseInt(caloriesCapacity);
-        }
-        catch (NumberFormatException e){
-            return false;
-        }
-        dish.setCaloriesCapacity(capacity);
-        dish.setIngredients(products);
-        dish.setRecepyLink(link);
-        dao.update(dish);
+    public static boolean update(String title, Integer caloriesCapacity, String link, HashMap<Product, Integer> products){
+        data.
         return true;
     }
 
