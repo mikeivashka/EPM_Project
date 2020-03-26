@@ -35,10 +35,15 @@ public class ActivityService extends Service<Activity, Integer, ActivityDao>{
     }
 
     public boolean delete(Integer id){
-        return dao.delete(id);
+        Integer index = getIndexByKey(id);
+        if(index != -1){
+            data.remove(index);
+            return true;
+        }
+        else return false;
     }
 
     public ArrayList<Activity> getAll(){
-        return dao.getAll();
+        return data;
     }
 }
