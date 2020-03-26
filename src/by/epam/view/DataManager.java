@@ -195,7 +195,7 @@ public class DataManager {
         ob.setLink(scan.next());
         return ob;
     }
-    //
+
     private static Dish dishBuilder(){
         Dish ob = new Dish();
         System.out.println("dish title: ");
@@ -227,7 +227,7 @@ public class DataManager {
         ob.setRecepyLink(scan.next());
         return ob;
     }
-    //
+
     private static Product productBuilder(){
         System.out.println("Title: ");
         String pTitle = scan.next();
@@ -236,7 +236,7 @@ public class DataManager {
         Product product = new Product(pTitle, pCalories);
         return product;
     }
-    //
+
     private static BaseUser userBuilder(){
         BaseUser user = new BaseUser();
         System.out.println("Email: ");

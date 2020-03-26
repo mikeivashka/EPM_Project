@@ -42,7 +42,6 @@ public abstract class Dao<E, K>{
         }
         catch (IOException e){
             log.error(e);
-            e.printStackTrace();
         }
         catch (ClassNotFoundException e){
             log.error(e);
