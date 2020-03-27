@@ -2,12 +2,15 @@ package by.epam.services;
 
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
+import by.epam.entity.Activity;
 import by.epam.entity.BaseUser;
 import by.epam.entity.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BaseUserService extends UserService {
+    Scanner scan = new Scanner(System.in);
     private BaseUser create(Integer age
                          , Gender gender
                          , Integer height
@@ -42,6 +45,10 @@ public class BaseUserService extends UserService {
         return data.add(create(age, gender, height, weight, activityLevel, email, name, surname));
     }
 
+    public boolean add(BaseUser ob){
+        return data.add(ob);
+    }
+
     public boolean update(Integer age
             , Gender gender
             , Integer height
@@ -68,9 +75,17 @@ public class BaseUserService extends UserService {
         return false;
     }
 
+    public boolean update(BaseUser ob){
+        Integer index = getIndexByKey(ob.getEmail());
+        if(index != -1){
+            data.set(index, ob);
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    public User consoleBuilder() {
-        Scanner scan = new Scanner(System.in);
+    public BaseUser consoleBuilder() {
         System.out.println("name");
         String name = scan.next();
         System.out.println("surname");
@@ -135,6 +150,42 @@ public class BaseUserService extends UserService {
 
     @Override
     public void consoleManager() {
+        Integer choice;
+        System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
+        while(!scan.hasNextInt()){
+            System.out.println("Waiting for integer value");
+        }
+        choice = scan.nextInt();
 
+        switch (choice){
+            case 1:{
+                add(consoleBuilder());
+                break;
+            }
+            case 2:{
+                update(consoleBuilder());
+                break;
+            }
+            case 3:{
+                System.out.println("Enter email to delete");
+                String email = scan.next();
+                if(delete(email)) {
+                    System.out.println("Success");
+                }
+                else {
+                    System.out.println("Delete failed");
+                }
+                break;
+            }
+            case 4:{
+                ArrayList<BaseUser> data = getAll();
+                for(BaseUser e : data){
+                    System.out.println(e.toString());
+                }
+                break;
+            }
+            default:
+                return;
+        }
     }
 }
