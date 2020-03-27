@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-public abstract class Service <E extends Entity, KEY, DAO extends Dao<E,KEY>> {
+public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     static Logger log = LogManager.getLogger();
     protected ArrayList <E> data;
     protected DAO dao;
@@ -30,4 +30,6 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E,KEY>> {
         }
         return -1;
     }
+
+    public abstract E consoleBuilder();
 }
