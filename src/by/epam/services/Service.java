@@ -42,6 +42,10 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         dao.save(data);
     }
 
+    public boolean add(E ob){
+        return data.add(ob);
+    }
+
     public abstract E consoleBuilder();
 
     public abstract void consoleManager();

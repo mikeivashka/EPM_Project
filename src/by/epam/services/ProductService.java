@@ -18,12 +18,8 @@ public class ProductService extends Service<Product, String, ProductDao>{
         return ob;
     }
 
-    public boolean add(String title, Integer caloriesCapacity){
+    public boolean add(String title, Integer caloriesCapacity) {
         return data.add(this.create(title, caloriesCapacity));
-    }
-
-    public boolean add(Product product){
-        return  data.add(product);
     }
 
     public boolean update(String title, Integer caloriesCapacity){

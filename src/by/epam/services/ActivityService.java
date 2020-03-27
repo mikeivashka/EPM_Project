@@ -12,17 +12,13 @@ import java.util.Scanner;
 
 public class ActivityService extends Service<Activity, Integer, ActivityDao>{
 
-    private Activity create(Integer id, TrainingType type, String description, String link){
+    private Activity create(Integer id, TrainingType type, String description, String link) {
         Activity result = new Activity();
         result.setLink(link);
         result.setId(id);
         result.setDescription(description);
         result.setType(type);
         return result;
-    }
-
-    public boolean add(Activity ob){
-        return data.add(ob);
     }
 
     public boolean add(Integer id, TrainingType type, String description, String link){
