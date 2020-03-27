@@ -6,8 +6,7 @@ import by.epam.entity.Activity;
 import by.epam.entity.BaseUser;
 import by.epam.entity.User;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class BaseUserService extends UserService {
     Scanner scan = new Scanner(System.in);
@@ -91,6 +90,7 @@ public class BaseUserService extends UserService {
         System.out.println("surname");
         String surname = scan.next();
         System.out.println("email");
+        String email = scan.next();
 
         Gender gender;
         System.out.println("Gender\n: 1. male\n2.female");
@@ -137,7 +137,6 @@ public class BaseUserService extends UserService {
             }
         }
 
-        String email = scan.next();
         System.out.println("age(int): ");
         Integer age = scan.nextInt();
         System.out.println("height(double): ");
@@ -178,7 +177,20 @@ public class BaseUserService extends UserService {
                 break;
             }
             case 4:{
-                ArrayList<BaseUser> data = getAll();
+                //один из способов(возможно работает)
+                ArrayList<BaseUser> data1 = (ArrayList<BaseUser>) getAll().stream().filter(ob -> ob.getClass().equals(BaseUser.class));
+
+                //второй способо
+                //тоже возможно работатет
+                ArrayList<BaseUser> data = new ArrayList<>();
+                ArrayList<User> users = getAll();
+
+                for (int i = 0; i < users.size(); i++) {
+                    if(Objects.equals(users.get(i).getClass(), getClass())){
+                        data.add((BaseUser) users.get(i));
+                    }
+                }
+
                 for(BaseUser e : data){
                     System.out.println(e.toString());
                 }
@@ -188,4 +200,13 @@ public class BaseUserService extends UserService {
                 return;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseUserService that = (BaseUserService) o;
+        return Objects.equals(scan, that.scan);
+    }
+
 }
