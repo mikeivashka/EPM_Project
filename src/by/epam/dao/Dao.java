@@ -28,7 +28,7 @@ public abstract class Dao<E>{
             try {
                 outputStream.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
     }
