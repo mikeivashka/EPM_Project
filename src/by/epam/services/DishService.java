@@ -1,11 +1,14 @@
 package by.epam.services;
 
+import by.epam.collections.TrainingType;
 import by.epam.dao.DishDao;
+import by.epam.entity.Activity;
 import by.epam.entity.Dish;
 import by.epam.entity.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class DishService extends Service<Dish, String, DishDao>{
     private Dish create(String title, Integer caloriesCapacity, String link, HashMap<Product, Integer> products){
@@ -38,4 +41,24 @@ public class DishService extends Service<Dish, String, DishDao>{
     public ArrayList<Dish> getAll(){
         return data;
     }
+
+    public Dish consoleBuilder(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter title:");
+        String title = scan.next();
+        while(!scan.hasNextInt()){
+            System.out.println("Waiting for integer value");
+        }
+        Integer caloriesCapacity = scan.nextInt();
+        System.out.println("Enter a link with recepy");
+        String link = scan.next();
+        System.out.println("Choose products to add:");
+        ProductService productService = new ProductService();
+        ArrayList<Product> products = productService.getAll();
+        while(true){
+
+        }
+        return create(title, id);
+    }
+
 }
