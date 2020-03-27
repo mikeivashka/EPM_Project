@@ -11,6 +11,11 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     static Logger log = LogManager.getLogger();
     protected ArrayList <E> data;
     protected DAO dao;
+
+    public Service(){
+        this.data = dao.load();
+    }
+
     public  E getEntityByKey(KEY key){
         try {
             for(E obj : data) {
@@ -29,6 +34,12 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
             if (data.get(i).hashCode() == key.hashCode()) return i;
         }
         return -1;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        dao.save(data);
     }
 
     public abstract E consoleBuilder();
