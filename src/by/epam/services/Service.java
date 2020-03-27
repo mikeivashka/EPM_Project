@@ -43,4 +43,6 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     }
 
     public abstract E consoleBuilder();
+
+    public abstract void consoleManager();
 }

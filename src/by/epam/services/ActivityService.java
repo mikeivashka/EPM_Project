@@ -21,8 +21,21 @@ public class ActivityService extends Service<Activity, Integer, ActivityDao>{
         return result;
     }
 
+    public boolean add(Activity ob){
+        return data.add(ob);
+    }
+
     public boolean add(Integer id, TrainingType type, String description, String link){
         return data.add(this.create(id,type,description,link));
+    }
+
+    public boolean update(Activity ob){
+        Integer index = getIndexByKey(ob.getId());
+        if(index != -1){
+            data.set(index, ob);
+            return true;
+        }
+        return false;
     }
 
     public boolean update(Integer id, TrainingType type, String description, String link){
@@ -73,5 +86,52 @@ public class ActivityService extends Service<Activity, Integer, ActivityDao>{
         System.out.println("Enter a link with activity description: ");
         String link = scan.next();
         return create(id, trainingType, description, link);
+    }
+
+    public void consoleManager(){
+        Scanner scan = new Scanner(System.in);
+        Integer choice;
+        System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
+        while(!scan.hasNextInt()){
+            System.out.println("Waiting for integer value");
+        }
+        choice = scan.nextInt();
+        switch (choice){
+            case 1: {
+                add(consoleBuilder());
+                break;
+            }
+
+            case 2:{
+                update(consoleBuilder());
+                break;
+            }
+
+            case 3:{
+                System.out.println("Enter id to delete");
+                while(!scan.hasNextInt()){
+                    System.out.println("Waiting for integer value");
+                }
+                Integer id = scan.nextInt();
+                if(delete(id)) {
+                    System.out.println("Success");
+                }
+                else {
+                    System.out.println("Delete failed");
+                }
+                break;
+            }
+
+            case 4:{
+                ArrayList<Activity> data = getAll();
+                for(Activity e : data){
+                    System.out.println(e.toString());
+                }
+                break;
+            }
+            default:{
+                return;
+            }
+        }
     }
 }
