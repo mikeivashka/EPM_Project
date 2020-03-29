@@ -17,9 +17,13 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     }
 
     public  E getEntityByKey(KEY key){
+        return getEntityByHash(key.hashCode());
+    }
+
+    public E getEntityByHash(int hash){
         try {
             for(E obj : data) {
-                if (obj.hashCode() == key.hashCode()) return obj;
+                if (obj.hashCode() == hash) return obj;
             }
             throw new IllegalArgumentException();
         }
@@ -29,11 +33,16 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         }
         return data.get(0);
     }
-    protected Integer getIndexByKey(KEY key){
-        for(int i=0; i<data.size()-1;i++) {
-            if (data.get(i).hashCode() == key.hashCode()) return i;
+
+    protected Integer getIndexByHash(int hash) {
+        for (int i = 0; i < data.size() - 1; i++) {
+            if (data.get(i).hashCode() == hash) return i;
         }
         return -1;
+    }
+
+    protected Integer getIndexByKey(KEY key){
+        return getIndexByHash(key.hashCode());
     }
 
     @Override
@@ -46,7 +55,25 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         return data.add(ob);
     }
 
-    public abstract E consoleBuilder();
+    public ArrayList<E> getAll(){
+        return data;
+    }
 
-    public abstract void consoleManager();
+    public boolean update(E entity){
+        Integer index = getIndexByHash(entity.hashCode());
+        if(index != -1){
+            data.set(index, entity);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean delete(KEY key){
+        Integer index = getIndexByKey(key);
+        if(index != -1){
+            data.remove(index);
+            return true;
+        }
+        return false;
+    }
 }
