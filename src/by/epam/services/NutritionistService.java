@@ -1,35 +1,14 @@
 package by.epam.services;
 
+import by.epam.dao.NutritionistDao;
 import by.epam.entity.BaseUser;
 import by.epam.entity.Nutritionist;
 import by.epam.entity.User;
 
 import java.util.*;
 
-public class NutritionistService extends UserService {
+public class NutritionistService extends Service<Nutritionist, String, NutritionistDao> {
     Scanner scan = new Scanner(System.in);
-    private Nutritionist create(Date experience
-            , double rating
-            , String email
-            , String name
-            , String surname){
-        Nutritionist ob = new Nutritionist();
-        ob.setRating(rating);
-        ob.setExpirience(experience);
-        ob.setEmail(email);
-        ob.setName(name);
-        ob.setSurname(surname);
-        return ob;
-    }
-
-    public boolean add(Date experience
-            , double rating
-            , String email
-            , String name
-            , String surname){
-        return data.add(create(experience, rating, email, name, surname));
-    }
-
     public boolean add(Nutritionist ob){
         return data.add(ob);
     }

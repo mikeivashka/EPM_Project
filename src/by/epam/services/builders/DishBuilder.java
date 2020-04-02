@@ -1,7 +1,8 @@
-package by.epam.services;
+package by.epam.services.builders;
 
 import by.epam.entity.Dish;
 import by.epam.entity.Product;
+import by.epam.services.ProductService;
 
 import java.util.ArrayList;
 import java.util.HashMap;

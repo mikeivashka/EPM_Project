@@ -1,4 +1,4 @@
-package by.epam.services;
+package by.epam.services.builders;
 
 import by.epam.collections.TrainingType;
 import by.epam.entity.Activity;

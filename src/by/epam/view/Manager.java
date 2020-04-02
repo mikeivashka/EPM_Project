@@ -1,19 +1,22 @@
 package by.epam.view;
 
-import by.epam.entity.Activity;
-import by.epam.entity.Dish;
-import by.epam.entity.Product;
+import by.epam.entity.*;
 import by.epam.services.*;
+import by.epam.services.builders.ActivityBuilder;
+import by.epam.services.builders.BaseUserBuilder;
+import by.epam.services.builders.DishBuilder;
+import by.epam.services.builders.ProductBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Manager {
     static Logger logger = LogManager.getLogger();
+    Scanner scan = new Scanner(System.in);
     public void productManager(){
-        Scanner scan = new Scanner(System.in);
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         while(!scan.hasNextInt()){
@@ -57,7 +60,6 @@ public class Manager {
     }
 
     public void dishManager(){
-        Scanner scan = new Scanner(System.in);
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         while(!scan.hasNextInt()){
@@ -101,7 +103,6 @@ public class Manager {
     }
 
     public void activityManager(){
-        Scanner scan = new Scanner(System.in);
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         while(!scan.hasNextInt()){
@@ -144,6 +145,47 @@ public class Manager {
             default:{
                 return;
             }
+        }
+    }
+
+    public void baseUserManager() {
+        Integer choice;
+        BaseUserService userService = new BaseUserService();
+        System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
+        while(!scan.hasNextInt()){
+            System.out.println("Waiting for integer value");
+        }
+        choice = scan.nextInt();
+
+        switch (choice){
+            case 1:{
+                userService.add(new BaseUserBuilder().consoleBuilder());
+                break;
+            }
+            case 2:{
+                userService.update(new BaseUserBuilder().consoleBuilder());
+                break;
+            }
+            case 3:{
+                System.out.println("Enter email to delete");
+                String email = scan.next();
+                if(userService.delete(email)) {
+                    System.out.println("Success");
+                }
+                else {
+                    System.out.println("Delete failed");
+                }
+                break;
+            }
+            case 4:{
+                ArrayList<BaseUser> users = userService.getAll();
+                for(BaseUser e : users){
+                    System.out.println(e.toString());
+                }
+                break;
+            }
+            default:
+                return;
         }
     }
 }
