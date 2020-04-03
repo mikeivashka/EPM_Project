@@ -30,12 +30,21 @@ public class Manager {
         choice = scan.nextInt();
         switch (choice){
             case 1: {
-                productService.add(ProductBuilder.consoleBuilder());
+                try {
+                    productService.add(ProductBuilder.consoleBuilder());
+                }catch (IOException e){
+                    break;
+                }
                 break;
             }
 
             case 2:{
-                productService.update(ProductBuilder.consoleBuilder());
+                try {
+                    productService.update(ProductBuilder.consoleBuilder());
+                }catch (IOException e){
+                    logger.error("Operation failed, try again later");
+                }
+
                 break;
             }
 
@@ -73,12 +82,20 @@ public class Manager {
         choice = scan.nextInt();
         switch (choice){
             case 1: {
-                new DishService().add(new DishBuilder().consoleBuilder());
+                try {
+                    new DishService().add(new DishBuilder().consoleBuilder());
+                }catch (IOException e){
+                    break;
+                }
                 break;
             }
 
             case 2:{
-                new DishService().update(new DishBuilder().consoleBuilder());
+                try {
+                    new DishService().update(new DishBuilder().consoleBuilder());
+                }catch (IOException e){
+                    logger.error("Operation failed, try again later");
+                }
                 break;
             }
 
@@ -173,11 +190,19 @@ public class Manager {
 
         switch (choice){
             case 1:{
-                userService.add(new BaseUserBuilder().consoleBuilder());
+                try{
+                    userService.add(new BaseUserBuilder().consoleBuilder());
+                }catch (IOException e){
+                    logger.error("Operation failed, try again later");
+                }
                 break;
             }
             case 2:{
-                userService.update(new BaseUserBuilder().consoleBuilder());
+                try{
+                    userService.update(new BaseUserBuilder().consoleBuilder());
+                }catch (IOException e){
+                    break;
+                }
                 break;
             }
             case 3:{
@@ -214,11 +239,21 @@ public class Manager {
 
         switch (choice){
             case 1:{
-                service.add(NutritionistBuilder.consoleBuilder());
+                try {
+                    service.add(NutritionistBuilder.consoleBuilder());
+                }catch (IOException e){
+                    logger.error("Operation failed, try again later");
+                }
+
                 break;
             }
             case 2:{
-                service.update(NutritionistBuilder.consoleBuilder());
+                try {
+                    service.update(NutritionistBuilder.consoleBuilder());
+                }catch (IOException e){
+                    break;
+                }
+
                 break;
             }
             case 3:{
