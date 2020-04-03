@@ -5,14 +5,6 @@ import by.epam.entity.Product;
 import java.util.Scanner;
 
 public class ProductBuilder {
-    public Product ProductBuilder(String title, Integer caloriesCapacity) {
-        return getProduct(title, caloriesCapacity);
-    }
-
-    public Product PruductBuilder(){
-        return new Product();
-    }
-
     public static Product getProduct(String title, Integer caloriesCapacity){
         Product product = new Product();
         product.setCaloriesCapacity(caloriesCapacity);
@@ -20,7 +12,7 @@ public class ProductBuilder {
         return product;
     }
 
-    public Product consoleBuilder(){
+    public static Product consoleBuilder(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Title: ");
         String title = scan.next();

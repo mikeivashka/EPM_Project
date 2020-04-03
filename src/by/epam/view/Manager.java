@@ -2,10 +2,7 @@ package by.epam.view;
 
 import by.epam.entity.*;
 import by.epam.services.*;
-import by.epam.services.builders.ActivityBuilder;
-import by.epam.services.builders.BaseUserBuilder;
-import by.epam.services.builders.DishBuilder;
-import by.epam.services.builders.ProductBuilder;
+import by.epam.services.builders.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +12,12 @@ import java.util.Scanner;
 
 public class Manager {
     static Logger logger = LogManager.getLogger();
-    Scanner scan = new Scanner(System.in);
+    static Scanner scan;
+
+    static {
+        scan = new Scanner(System.in);
+    }
+
     public void productManager(){
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
@@ -25,7 +27,7 @@ public class Manager {
         choice = scan.nextInt();
         switch (choice){
             case 1: {
-                new ProductService().add(new ProductBuilder().consoleBuilder());
+                new ProductService().add(ProductBuilder.consoleBuilder());
                 break;
             }
 
@@ -186,6 +188,46 @@ public class Manager {
             }
             default:
                 return;
+        }
+    }
+
+    public void nutritionistManager() {
+        Integer choice;
+        NutritionistService service = new NutritionistService();
+        System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
+        while(!scan.hasNextInt()){
+            System.out.println("Waiting for integer value");
+        }
+        choice = scan.nextInt();
+
+        switch (choice){
+            case 1:{
+                service.add(NutritionistBuilder.consoleBuilder());
+                break;
+            }
+            case 2:{
+                service.update(NutritionistBuilder.consoleBuilder());
+                break;
+            }
+            case 3:{
+                System.out.println("Enter email to delete");
+                String email = scan.next();
+                if(service.delete(email)) {
+                    System.out.println("Success");
+                }
+                else {
+                    System.out.println("Delete failed");
+                }
+                break;
+            }
+            case 4:{
+                ArrayList<Nutritionist> data = service.getAll();
+                for(Nutritionist e : data){
+                    System.out.println(e.toString());
+                }
+                break;
+            }
+            default: return;
         }
     }
 }

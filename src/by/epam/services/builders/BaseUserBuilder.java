@@ -7,14 +7,6 @@ import by.epam.entity.BaseUser;
 import java.util.Scanner;
 
 public class BaseUserBuilder {
-    public BaseUser BaseUserBuilder() {
-        return new BaseUser();
-    }
-
-    public BaseUser BaseUserBuilder(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
-        return getBaseUser(email, name, surname, activityLevel, age, gender, height, weight);
-    }
-
     public BaseUser getBaseUser(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
         BaseUser ob = new BaseUser();
         ob.setAge(age);

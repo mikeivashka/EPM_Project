@@ -9,13 +9,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class DishBuilder {
-    public Dish DishBuilder() {
-        return new Dish();
-    }
-
-    public Dish DishBuilder(String title, Integer caloriesCapacity, HashMap<Product, Integer> ingredients, String link){
-        return getDish(title, caloriesCapacity, ingredients, link);
-    }
 
     public Dish getDish(String title, Integer caloriesCapacity, HashMap<Product, Integer> ingredients, String link){
         Dish dish = new Dish();
