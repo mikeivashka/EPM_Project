@@ -14,14 +14,6 @@ import java.util.Scanner;
 public class ActivityBuilder {
     private static Logger log = LogManager.getLogger();
 
-    public Activity ActivityBuilder() {
-        return new Activity();
-    }
-
-    public Activity ActivityBuilder(Integer id, TrainingType type, String description, String link) {
-        return getActivity(id, type, description, link);
-    }
-
     public Activity getActivity(Integer id, TrainingType type, String description, String link) {
         Activity result = new Activity();
         result.setLink(link);

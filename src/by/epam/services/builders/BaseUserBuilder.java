@@ -34,7 +34,7 @@ public class BaseUserBuilder {
             System.out.println("email");
             String email = scan.next();
             Gender gender;
-            System.out.println("Gender\n: 1. male\n2.female");
+            System.out.println("Gender:\n 1. male\n2.female");
             switch (scan.nextInt()) {
                 case 1: {
                     gender = Gender.MALE;

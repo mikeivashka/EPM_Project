@@ -33,7 +33,6 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     protected Integer getIndexByHash(int hash) {
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).hashCode() == hash) return i;
-            log.info(data.get(i).hashCode());
         }
         return -1;
     }
@@ -44,7 +43,8 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
 
     public boolean add(E ob){
         try{
-            return data.add(ob);
+            if(getIndexByHash(ob.hashCode()) != -1)return data.add(ob);
+            else return false;
         }catch (NullPointerException e){
             log.error(e);
             return false;
