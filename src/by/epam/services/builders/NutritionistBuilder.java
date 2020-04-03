@@ -29,13 +29,8 @@ public class NutritionistBuilder {
         System.out.println("rating");
         Double rating = scan.nextDouble();
 
-        System.out.println("start day");
-        int day = scan.nextInt();
-        System.out.println("start month");
-        int month = scan.nextInt();
         System.out.println("start year");
         int year = scan.nextInt();
-        //Date start = new Date().setTime();
         Date start = new GregorianCalendar(01,01,year).getTime();
         return getNutritionist(email, name, surname, start, rating);
     }

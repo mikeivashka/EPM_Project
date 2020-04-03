@@ -26,6 +26,7 @@ public class Nutritionist extends User{
     @Override
     public String toString() {
         return new StringJoiner(", ", Nutritionist.class.getSimpleName() + "[", "]")
+                .add(super.toString())
                 .add("experience=" + experience)
                 .add("rating=" + rating)
                 .toString();

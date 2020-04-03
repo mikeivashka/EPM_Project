@@ -26,6 +26,7 @@ public class MainView {
                     break;
                 case 5:
                     manager.nutritionistManager();
+                    break;
                 case 0:
                     System.exit(0);
                 default: continue;
