@@ -10,4 +10,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class DishService extends Service<Dish, String, DishDao>{
+
+
+    public DishService() {
+        dao = new DishDao();
+    }
 }

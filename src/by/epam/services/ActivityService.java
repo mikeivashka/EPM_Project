@@ -11,5 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ActivityService extends Service<Activity, Integer, ActivityDao>{
-
+    public ActivityService() {
+        dao = new ActivityDao();
+    }
 }

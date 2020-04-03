@@ -10,6 +10,7 @@ import by.epam.entity.User;
 import java.util.*;
 
 public class BaseUserService extends Service<BaseUser, String, BaseUserDao> {
-
-
+    public BaseUserService() {
+        dao = new BaseUserDao();
+    }
 }

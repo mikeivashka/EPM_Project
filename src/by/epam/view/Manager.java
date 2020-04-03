@@ -19,6 +19,8 @@ public class Manager {
     }
 
     public void productManager(){
+
+        ProductService productService = new ProductService();
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         while(!scan.hasNextInt()){
@@ -27,19 +29,19 @@ public class Manager {
         choice = scan.nextInt();
         switch (choice){
             case 1: {
-                new ProductService().add(ProductBuilder.consoleBuilder());
+                productService.add(ProductBuilder.consoleBuilder());
                 break;
             }
 
             case 2:{
-                new ProductService().update(new ProductBuilder().consoleBuilder());
+                productService.update(ProductBuilder.consoleBuilder());
                 break;
             }
 
             case 3:{
                 System.out.println("Enter title to delete");
                 String title = scan.next();
-                if(new ProductService().delete(title)) {
+                if(productService.delete(title)) {
                     logger.info("Object Deleted successfully");
                 }
                 else {
@@ -49,7 +51,7 @@ public class Manager {
             }
 
             case 4:{
-                ArrayList<Product> data = new ProductService().getAll();
+                ArrayList<Product> data = productService.getAll();
                 for(Product e : data){
                     System.out.println(e.toString());
                 }

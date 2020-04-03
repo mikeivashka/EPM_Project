@@ -12,10 +12,6 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     protected ArrayList <E> data;
     protected DAO dao;
 
-    public Service(){
-        this.data = dao.load();
-    }
-
     public  E getEntityByKey(KEY key){
         return getEntityByHash(key.hashCode());
     }
@@ -45,14 +41,15 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         return getIndexByHash(key.hashCode());
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        dao.save(data);
-    }
-
     public boolean add(E ob){
-        return data.add(ob);
+        try{
+            return data.add(ob);
+        }catch (NullPointerException e){
+            log.error(e);
+            return false;
+        }finally {
+            dao.save(data);
+        }
     }
 
     public ArrayList<E> getAll(){
@@ -63,6 +60,7 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         Integer index = getIndexByHash(entity.hashCode());
         if(index != -1){
             data.set(index, entity);
+            dao.save(data);
             return true;
         }
         return false;
@@ -72,6 +70,7 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         Integer index = getIndexByKey(key);
         if(index != -1){
             data.remove(index);
+            dao.save(data);
             return true;
         }
         return false;

@@ -44,7 +44,7 @@ public abstract class Dao<E>{
         }
         catch (IOException e){
             log.error(e);
-            return new ArrayList();
+            return new ArrayList<E>();
         }
         catch (ClassNotFoundException e){
             log.error(e);
@@ -52,7 +52,9 @@ public abstract class Dao<E>{
         }
         finally {
             try {
-                inputStream.close();
+                if(inputStream != null) {
+                    inputStream.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
