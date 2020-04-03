@@ -33,7 +33,7 @@ public class DishBuilder {
         System.out.println("Choose products to add:");
         ProductService productService = new ProductService();
         ArrayList<Product> products = productService.getAll();
-        for (int i = 0; i < products.size()-1; i++) {
+        for (int i = 0; i < products.size(); i++) {
             System.out.println((i+1) + ". " + products.get(i).toString());
         }
         Integer num;

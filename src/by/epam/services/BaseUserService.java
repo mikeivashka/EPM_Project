@@ -11,6 +11,7 @@ import java.util.*;
 
 public class BaseUserService extends Service<BaseUser, String, BaseUserDao> {
     public BaseUserService() {
-        dao = new BaseUserDao();
+        super.dao = new BaseUserDao();
+        super.data = dao.load();
     }
 }

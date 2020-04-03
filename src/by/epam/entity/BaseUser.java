@@ -78,7 +78,8 @@ public class BaseUser extends User{
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("BaseUser{");
-        sb.append("age=").append(age);
+        sb.append(super.toString());
+        sb.append(",age=").append(age);
         sb.append(", gender=").append(gender);
         sb.append(", height=").append(height);
         sb.append(", weight=").append(weight);

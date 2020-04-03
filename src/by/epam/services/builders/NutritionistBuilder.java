@@ -35,7 +35,8 @@ public class NutritionistBuilder {
         int month = scan.nextInt();
         System.out.println("start year");
         int year = scan.nextInt();
-        Date start = new GregorianCalendar(day,month,year).getTime();
+        //Date start = new Date().setTime();
+        Date start = new GregorianCalendar(01,01,year).getTime();
         return getNutritionist(email, name, surname, start, rating);
     }
 }

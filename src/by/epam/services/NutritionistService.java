@@ -8,6 +8,6 @@ import java.util.*;
 public class NutritionistService extends Service<Nutritionist, String, NutritionistDao> {
     public NutritionistService() {
         super.dao = new NutritionistDao();
-        super.dao.load();
+        super.data = dao.load();
     }
 }

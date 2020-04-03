@@ -13,6 +13,7 @@ public class DishService extends Service<Dish, String, DishDao>{
 
 
     public DishService() {
-        dao = new DishDao();
+        super.dao = new DishDao();
+        super.data = dao.load();
     }
 }

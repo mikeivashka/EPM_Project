@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class ActivityService extends Service<Activity, Integer, ActivityDao>{
     public ActivityService() {
-        dao = new ActivityDao();
+        super.dao = new ActivityDao();
+        super.data = dao.load();
     }
 }
