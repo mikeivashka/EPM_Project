@@ -11,8 +11,8 @@ public class Nutritionist extends User{
         return experience;
     }
 
-    public void setExpirience(Date expirience) {
-        this.experience = expirience;
+    public void setExperience(Date experience) {
+        this.experience = experience;
     }
 
     public double getRating() {

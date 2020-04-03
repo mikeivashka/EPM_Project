@@ -2,10 +2,18 @@ package by.epam.services.builders;
 
 import by.epam.collections.TrainingType;
 import by.epam.entity.Activity;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+
+
 public class ActivityBuilder {
+    private static Logger log = LogManager.getLogger();
+
     public Activity ActivityBuilder() {
         return new Activity();
     }
@@ -23,31 +31,37 @@ public class ActivityBuilder {
         return result;
     }
 
-    public Activity consoleBuilder(){
+    public Activity consoleBuilder() throws IOException {
         Scanner scan = new Scanner(System.in);
-        System.out.println("id (integer): ");
-        Integer id = scan.nextInt();
-        System.out.println("training type (1 - POWER, 2 - CARDIO, default - CARDIO)");
-        TrainingType trainingType;
-        switch (scan.nextInt()){
-            case 1:{
-                trainingType = TrainingType.POWER;
-                break;
+        try {
+            System.out.println("id (integer): ");
+            Integer id = scan.nextInt();
+            System.out.println("training type (1 - POWER, 2 - CARDIO, default - CARDIO)");
+            TrainingType trainingType;
+            switch (scan.nextInt()){
+                case 1:{
+                    trainingType = TrainingType.POWER;
+                    break;
+                }
+                case 2:{
+                    trainingType = TrainingType.CARDIO;
+                    break;
+                }
+                default: {
+                    trainingType = TrainingType.CARDIO;
+                    break;
+                }
             }
-            case 2:{
-                trainingType = TrainingType.CARDIO;
-                break;
-            }
-            default: {
-                trainingType = TrainingType.CARDIO;
-                break;
-            }
+            System.out.println("Enter a description line: ");
+            String description = scan.next();
+            System.out.println("Enter a link with activity description: ");
+            String link = scan.next();
+            return getActivity(id, trainingType, description, link);
         }
-        System.out.println("Enter a description line: ");
-        String description = scan.next();
-        System.out.println("Enter a link with activity description: ");
-        String link = scan.next();
-        return getActivity(id, trainingType, description, link);
+        catch (Exception e){
+            log.log(Level.ERROR, "Failed to create object");
+            throw new IOException();
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import by.epam.services.builders.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -115,12 +116,21 @@ public class Manager {
         choice = scan.nextInt();
         switch (choice){
             case 1: {
-                new ActivityService().add(new ActivityBuilder().consoleBuilder());
+                try{
+                    new ActivityService().add(new ActivityBuilder().consoleBuilder());
+                }
+                catch (IOException e){
+                    break;
+                }
                 break;
             }
 
             case 2:{
-                new ActivityService().update(new ActivityBuilder().consoleBuilder());
+                try {
+                    new ActivityService().update(new ActivityBuilder().consoleBuilder());
+                } catch (IOException e) {
+                    logger.error("Operation failed, try again later");
+                }
                 break;
             }
 

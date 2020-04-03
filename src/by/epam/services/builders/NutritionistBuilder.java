@@ -13,7 +13,7 @@ public class NutritionistBuilder {
         ob.setEmail(email);
         ob.setName(name);
         ob.setSurname(surname);
-        ob.setExpirience(experience);
+        ob.setExperience(experience);
         ob.setRating(rating);
         return ob;
     }
