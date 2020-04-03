@@ -31,8 +31,9 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     }
 
     protected Integer getIndexByHash(int hash) {
-        for (int i = 0; i < data.size() - 1; i++) {
+        for (int i = 0; i < data.size(); i++) {
             if (data.get(i).hashCode() == hash) return i;
+            log.info(data.get(i).hashCode());
         }
         return -1;
     }
@@ -57,7 +58,7 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     }
 
     public boolean update(E entity){
-        Integer index = getIndexByHash(entity.hashCode());
+        int index = getIndexByHash(entity.hashCode());
         if(index != -1){
             data.set(index, entity);
             dao.save(data);
@@ -67,7 +68,7 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
     }
 
     public boolean delete(KEY key){
-        Integer index = getIndexByKey(key);
+        int index = getIndexByKey(key);
         if(index != -1){
             data.remove(index);
             dao.save(data);

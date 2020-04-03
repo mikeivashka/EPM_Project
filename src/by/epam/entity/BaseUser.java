@@ -87,5 +87,4 @@ public class BaseUser extends User{
         sb.append('}');
         return sb.toString();
     }
-
 }
