@@ -48,6 +48,7 @@ public class ActivityBuilder {
             String description = scan.next();
             System.out.println("Enter a link with activity description: ");
             String link = scan.next();
+            log.info(getActivity(id, trainingType, description, link).toString());
             return getActivity(id, trainingType, description, link);
         }
         catch (Exception e){

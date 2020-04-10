@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Manager {
@@ -23,7 +24,7 @@ public class Manager {
         ProductService productService = new ProductService();
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
-        while(!scan.hasNextInt()){
+        if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
         }
         choice = scan.nextInt();
@@ -75,7 +76,7 @@ public class Manager {
     public void dishManager(){
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
-        while(!scan.hasNextInt()){
+        if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
         }
         choice = scan.nextInt();
@@ -126,7 +127,7 @@ public class Manager {
     public void activityManager(){
         Integer choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
-        while(!scan.hasNextInt()){
+        if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
         }
         choice = scan.nextInt();
@@ -136,7 +137,7 @@ public class Manager {
                     new ActivityService().add(new ActivityBuilder().consoleBuilder());
                 }
                 catch (IOException e){
-                    logger.error("ConsoleBuilder failed");
+                    logger.error("En error occurred");
                 }
                 break;
             }
@@ -145,7 +146,7 @@ public class Manager {
                 try {
                     new ActivityService().update(new ActivityBuilder().consoleBuilder());
                 } catch (IOException e) {
-                    logger.error("Operation failed, try again later");
+                    logger.error("En error occurred");
                 }
                 break;
             }
@@ -182,7 +183,7 @@ public class Manager {
         Integer choice;
         BaseUserService userService = new BaseUserService();
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
-        while(!scan.hasNextInt()){
+        if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
         }
         choice = scan.nextInt();
@@ -231,17 +232,20 @@ public class Manager {
         Integer choice;
         NutritionistService service = new NutritionistService();
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
-        while(!scan.hasNextInt()){
-            System.out.println("Waiting for integer value");
+        try{
+            choice = scan.nextInt();
         }
-        choice = scan.nextInt();
+        catch (InputMismatchException e){
+            logger.error("Incorrect input");
+            return;
+        }
 
         switch (choice){
             case 1:{
                 try {
                     service.add(NutritionistBuilder.consoleBuilder());
                 }catch (IOException e){
-                    logger.error("Operation failed, try again later");
+                    logger.error("En error occurred");
                 }
                 break;
             }

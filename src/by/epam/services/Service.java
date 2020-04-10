@@ -37,7 +37,7 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
 
     public boolean add(E ob){
         try{
-            if(getIndexByHash(ob.hashCode()) != -1)return data.add(ob);
+            if(getIndexByHash(ob.hashCode()) == -1)return data.add(ob);
             else return false;
         }catch (NullPointerException e){
             log.error(e);
