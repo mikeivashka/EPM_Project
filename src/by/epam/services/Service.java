@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 
 public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
-    static Logger log = LogManager.getLogger();
+    protected static Logger log = LogManager.getLogger();
     protected ArrayList <E> data;
     protected DAO dao;
 
@@ -16,18 +16,12 @@ public abstract class Service <E extends Entity, KEY, DAO extends Dao<E>> {
         return getEntityByHash(key.hashCode());
     }
 
-    public E getEntityByHash(int hash){
-        try {
-            for(E obj : data) {
-                if (obj.hashCode() == hash) return obj;
-            }
-            throw new IllegalArgumentException();
+    public E getEntityByHash(int hash) throws  IllegalArgumentException{
+        for(E obj : data) {
+            if (obj.hashCode() == hash) return obj;
         }
-        catch (IllegalArgumentException e)
-        {
-            log.error("OBJECT NOT FOUND EXCEPTION");
-        }
-        return data.get(0);
+        log.error("OBJECT NOT FOUND EXCEPTION");
+        throw new IllegalArgumentException();
     }
 
     protected Integer getIndexByHash(int hash) {

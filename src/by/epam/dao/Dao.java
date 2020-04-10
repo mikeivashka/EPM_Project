@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public abstract class Dao<E>{
 
-    static Logger log = LogManager.getLogger();
+    private static Logger log = LogManager.getLogger();
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
@@ -56,7 +56,7 @@ public abstract class Dao<E>{
                     inputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
     }

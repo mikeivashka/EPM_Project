@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.StringJoiner;
 
 public class Nutritionist extends User{
-    public Date experience;
-    public double rating;
+    private Date experience;
+    private double rating;
 
     public Date getExperience() {
         return experience;

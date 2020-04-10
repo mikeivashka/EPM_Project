@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class NutritionistBuilder {
-    static Logger log = LogManager.getLogger();
+    private static Logger log = LogManager.getLogger();
 
     public static Nutritionist getNutritionist(String email, String name, String surname, Date experience, Double rating){
         Nutritionist ob = new Nutritionist();

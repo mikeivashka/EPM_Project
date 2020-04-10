@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class BaseUserBuilder {
-    static Logger log = LogManager.getLogger();
+    private static Logger log = LogManager.getLogger();
     public BaseUser getBaseUser(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
         BaseUser ob = new BaseUser();
         ob.setAge(age);

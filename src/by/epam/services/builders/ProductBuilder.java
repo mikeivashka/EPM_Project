@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ProductBuilder {
-    static Logger log = LogManager.getLogger();
+    private static Logger log = LogManager.getLogger();
 
     public static Product getProduct(String title, Integer caloriesCapacity){
         Product product = new Product();

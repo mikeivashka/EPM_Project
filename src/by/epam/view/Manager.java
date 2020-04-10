@@ -8,12 +8,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Manager {
-    static Logger logger = LogManager.getLogger();
-    static Scanner scan;
+    private static Logger logger = LogManager.getLogger();
+    private static Scanner scan;
 
     static {
         scan = new Scanner(System.in);
@@ -33,7 +32,7 @@ public class Manager {
                 try {
                     productService.add(ProductBuilder.consoleBuilder());
                 }catch (IOException e){
-                    break;
+                    logger.error("En error occurred");
                 }
                 break;
             }
@@ -42,7 +41,7 @@ public class Manager {
                 try {
                     productService.update(ProductBuilder.consoleBuilder());
                 }catch (IOException e){
-                    logger.error("Operation failed, try again later");
+                    logger.error("En error occurred");
                 }
 
                 break;
@@ -85,7 +84,7 @@ public class Manager {
                 try {
                     new DishService().add(new DishBuilder().consoleBuilder());
                 }catch (IOException e){
-                    break;
+                    logger.error("En error occurred");
                 }
                 break;
             }
@@ -94,7 +93,7 @@ public class Manager {
                 try {
                     new DishService().update(new DishBuilder().consoleBuilder());
                 }catch (IOException e){
-                    logger.error("Operation failed, try again later");
+                    logger.error("En error occurred");
                 }
                 break;
             }
@@ -137,7 +136,7 @@ public class Manager {
                     new ActivityService().add(new ActivityBuilder().consoleBuilder());
                 }
                 catch (IOException e){
-                    break;
+                    logger.error("ConsoleBuilder failed");
                 }
                 break;
             }
@@ -201,7 +200,7 @@ public class Manager {
                 try{
                     userService.update(new BaseUserBuilder().consoleBuilder());
                 }catch (IOException e){
-                    break;
+                    logger.error("En error occurred");
                 }
                 break;
             }
@@ -244,14 +243,13 @@ public class Manager {
                 }catch (IOException e){
                     logger.error("Operation failed, try again later");
                 }
-
                 break;
             }
             case 2:{
                 try {
                     service.update(NutritionistBuilder.consoleBuilder());
                 }catch (IOException e){
-                    break;
+                    logger.error("En error occurred");
                 }
 
                 break;
