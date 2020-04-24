@@ -1,6 +1,6 @@
 package by.epam.services;
 
-import by.epam.dao.Dao;
+import by.epam.dao.deprecated.Dao;
 import by.epam.entity.Entity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

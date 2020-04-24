@@ -13,6 +13,13 @@ public class Activity extends Entity {
     private String link;
     private static final long serialVersionUID = 1L;
 
+    public Activity(Integer id, TrainingType type, String description, String link) {
+        this.id = id;
+        this.type = type;
+        this.description = description;
+        this.link = link;
+    }
+
     public Activity() {
     }
 

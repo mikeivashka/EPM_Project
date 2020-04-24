@@ -1,4 +1,4 @@
-package by.epam.dao;
+package by.epam.dao.deprecated;
 import by.epam.entity.Dish;
 
     public class DishDao extends Dao<Dish> {

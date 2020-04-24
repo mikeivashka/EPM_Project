@@ -1,4 +1,4 @@
-package by.epam.dao;
+package by.epam.dao.deprecated;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +37,6 @@ public abstract class Dao<E>{
 
         try{
             inputStream = new ObjectInputStream(new FileInputStream(getDir()));
-            log.info(inputStream);
             ArrayList <E> data = (ArrayList<E>)inputStream.readObject();
             log.info( data.size() + " objects LOADED successfully");
             return  data;

@@ -1,6 +1,6 @@
 package by.epam.services;
 
-import by.epam.dao.ActivityDao;
+import by.epam.dao.deprecated.ActivityDao;
 import by.epam.entity.Activity;
 
 public class ActivityService extends Service<Activity, Integer, ActivityDao>{
