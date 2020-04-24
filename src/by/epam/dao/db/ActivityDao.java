@@ -12,7 +12,7 @@ public class ActivityDao extends Dao<Activity, Integer> {
     private static final String SELECT_ALL = "SELECT * FROM activity";
     private static final String INSERT_FULL = "INSERT INTO activity VALUES(NULL, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM activity where Id = ?";
-    private static final String GET_BY0_ID = "SELECT * FROM activity where Id = ?";
+    private static final String GET_BY_ID = "SELECT * FROM activity where Id = ?";
     private static final String UPDATE = "UPDATE activity SET Type = ?, Link = ?, Description = ? WHERE Id = ?";
     public ActivityDao() {
         super();
