@@ -2,7 +2,9 @@ package by.epam.view;
 
 import by.epam.collections.TrainingType;
 import by.epam.dao.db.ActivityDao;
+import by.epam.dao.db.ProductDao;
 import by.epam.entity.Activity;
+import by.epam.entity.Product;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -10,15 +12,14 @@ import java.util.Scanner;
 public class MainView {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        ActivityDao dao = new ActivityDao();
-        for(Activity a : dao.getAll()){
+        for(Product a : ProductDao.getAll()){
             System.out.println(a.toString());
         }
-        Activity activity = new Activity(0, TrainingType.CARDIO, "Ваша первая утренняя пробежка", "http://www.stylefitness.ru/gayd-beg-dlya-nachinayushchikh.html");
+        Product product = new Product("Шоколад молочный", 270);
         try {
-            dao.update(activity);
-            dao.delete(6);
-            dao.getEntityById(2).ifPresent(System.out::println);
+            ProductDao.update(product);
+            ActivityDao.delete(6);
+            ActivityDao.getEntityById(2).ifPresent(System.out::println);
         } catch (SQLException e) {
             e.printStackTrace();
         }

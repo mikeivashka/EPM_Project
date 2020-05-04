@@ -14,14 +14,10 @@ public class ActivityDao extends Dao<Activity, Integer> {
     private static final String DELETE = "DELETE FROM activity where Id = ?";
     private static final String GET_BY_ID = "SELECT * FROM activity where Id = ?";
     private static final String UPDATE = "UPDATE activity SET Type = ?, Link = ?, Description = ? WHERE Id = ?";
-    public ActivityDao() {
-        super();
-    }
 
-    @Override
-    public void update(Activity entity) {
+    public static void update(Activity entity) {
         try {
-            PreparedStatement statement = getPreparedStatement(UPDATE);
+            var statement = connection.prepareStatement(UPDATE);
             statement.setString(1, entity.getType().toString());
             statement.setString(2, entity.getLink());
             statement.setString(3, entity.getDescription());
@@ -33,9 +29,8 @@ public class ActivityDao extends Dao<Activity, Integer> {
         }
     }
 
-    @Override
-    public Optional<Activity> getEntityById(Integer id) throws SQLException{
-        PreparedStatement statement = getPreparedStatement(GET_BY_ID);
+    public static Optional<Activity> getEntityById(Integer id) throws SQLException{
+        var statement = connection.prepareStatement(GET_BY_ID);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         Activity activity = null;
@@ -48,17 +43,13 @@ public class ActivityDao extends Dao<Activity, Integer> {
         return Optional.ofNullable(activity);
     }
 
-
-
-    @Override
-    public void delete(Integer id) throws SQLException{
+    public static void delete(Integer id) throws SQLException{
         PreparedStatement statement = connection.prepareStatement(DELETE);
         statement.setInt(1, id);
         statement.execute();
     }
 
-    @Override
-    public void create(Activity entity) throws SQLException{
+    public static void create(Activity entity) throws SQLException{
         PreparedStatement statement = connection.prepareStatement(INSERT_FULL);
         statement.setString(1, entity.getType().toString());
         statement.setString(2, entity.getLink());
@@ -66,9 +57,8 @@ public class ActivityDao extends Dao<Activity, Integer> {
         statement.execute();
     }
 
-    @Override
-    public List<Activity> getAll() {
-        LinkedList<Activity> result = new LinkedList<>();
+    public static List<Activity> getAll() {
+        var result = new LinkedList<Activity>();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(SELECT_ALL);
             while(resultSet.next()){
