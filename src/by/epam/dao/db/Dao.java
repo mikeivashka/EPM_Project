@@ -1,4 +1,5 @@
 package by.epam.dao.db;
+import by.epam.entity.Entity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -6,7 +7,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class Dao<E, K> {
+public abstract class Dao<E extends Entity, K> {
     protected static Connection connection;
     protected static Logger logger = LogManager.getLogger();
     static {

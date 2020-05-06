@@ -1,19 +1,14 @@
 package by.epam.entity;
 
-import by.epam.collections.ActivityLevel;
-import by.epam.collections.Gender;
-
-import java.io.Serializable;
-import java.util.Objects;
 import java.util.StringJoiner;
 
-public abstract class User extends Entity {
+public abstract class AbstractUser extends Entity {
     private String name;
     private String surname;
     private String email;
     private static final long serialVersionUID = 1L;
 
-    public User() {
+    public AbstractUser() {
         super();
     }
 
@@ -48,7 +43,7 @@ public abstract class User extends Entity {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", AbstractUser.class.getSimpleName() + "[", "]")
                 .add("name='" + name + "'")
                 .add("surname='" + surname + "'")
                 .add("email='" + email + "'")

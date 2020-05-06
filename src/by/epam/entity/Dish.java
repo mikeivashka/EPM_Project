@@ -13,6 +13,13 @@ public class Dish extends Entity {
     private String recepyLink;
     private static final long serialVersionUID = 1L;
 
+    public Dish(String title, Map<Product, Integer> ingredients, int caloriesCapacity, String recepyLink) {
+        this.title = title;
+        this.ingredients = ingredients;
+        this.caloriesCapacity = caloriesCapacity;
+        this.recepyLink = recepyLink;
+    }
+
     public Dish() {
         super();
     }

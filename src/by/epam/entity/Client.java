@@ -3,7 +3,7 @@ package by.epam.entity;
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
 
-public class BaseUser extends User{
+public class Client extends AbstractUser {
     private int age;
     private Gender gender;
     private int height;
@@ -11,11 +11,11 @@ public class BaseUser extends User{
     private ActivityLevel activityLevel;
     private static final long serialVersionUID = 1L;
 
-    public BaseUser(){
+    public Client(){
         super();
     }
 
-    public BaseUser(int age, Gender gender, int height, double weight, ActivityLevel activityLevel) {
+    public Client(int age, Gender gender, int height, double weight, ActivityLevel activityLevel) {
         this.age = age;
         this.gender = gender;
         this.height = height;
@@ -67,7 +67,7 @@ public class BaseUser extends User{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BaseUser that = (BaseUser) o;
+        Client that = (Client) o;
         return age == that.age &&
                 height == that.height &&
                 Double.compare(that.weight, weight) == 0 &&

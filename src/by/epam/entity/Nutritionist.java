@@ -3,7 +3,7 @@ package by.epam.entity;
 import java.util.Date;
 import java.util.StringJoiner;
 
-public class Nutritionist extends User{
+public class Nutritionist extends AbstractUser {
     private Date experience;
     private double rating;
 

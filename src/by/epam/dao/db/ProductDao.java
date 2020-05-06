@@ -1,7 +1,5 @@
 package by.epam.dao.db;
 
-import by.epam.collections.TrainingType;
-import by.epam.entity.Activity;
 import by.epam.entity.Product;
 import org.jetbrains.annotations.NotNull;
 

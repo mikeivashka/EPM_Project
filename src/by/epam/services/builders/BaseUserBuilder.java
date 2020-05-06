@@ -2,7 +2,7 @@ package by.epam.services.builders;
 
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
-import by.epam.entity.BaseUser;
+import by.epam.entity.Client;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class BaseUserBuilder {
     private static Logger log = LogManager.getLogger();
-    public BaseUser getBaseUser(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
-        BaseUser ob = new BaseUser();
+    public Client getBaseUser(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
+        Client ob = new Client();
         ob.setAge(age);
         ob.setActivityLevel(activityLevel);
         ob.setGender(gender);
@@ -24,7 +24,7 @@ public class BaseUserBuilder {
         ob.setSurname(surname);
         return ob;
     }
-    public BaseUser consoleBuilder()throws IOException{
+    public Client consoleBuilder()throws IOException{
         Scanner scan = new Scanner(System.in);
         try {
             System.out.println("name");

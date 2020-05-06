@@ -217,8 +217,8 @@ public class Manager {
                 break;
             }
             case 4:{
-                ArrayList<BaseUser> users = userService.getAll();
-                for(BaseUser e : users){
+                ArrayList<Client> users = userService.getAll();
+                for(Client e : users){
                     System.out.println(e.toString());
                 }
                 break;
