@@ -10,17 +10,20 @@ public class Client extends AbstractUser {
     private double weight;
     private ActivityLevel activityLevel;
     private static final long serialVersionUID = 1L;
+    private Nutritionist nutritionist;
+
 
     public Client(){
         super();
     }
 
-    public Client(int age, Gender gender, int height, double weight, ActivityLevel activityLevel) {
+    public Client(int age, Gender gender, int height, double weight, ActivityLevel activityLevel, Nutritionist nutritionist) {
         this.age = age;
         this.gender = gender;
         this.height = height;
         this.weight = weight;
         this.activityLevel = activityLevel;
+        this.nutritionist = nutritionist;
     }
 
     public ActivityLevel getActivityLevel() {
@@ -72,7 +75,8 @@ public class Client extends AbstractUser {
                 height == that.height &&
                 Double.compare(that.weight, weight) == 0 &&
                 gender == that.gender &&
-                activityLevel == that.activityLevel;
+                activityLevel == that.activityLevel &&
+                nutritionist == that.nutritionist;
     }
 
     @Override
@@ -84,7 +88,16 @@ public class Client extends AbstractUser {
         sb.append(", height=").append(height);
         sb.append(", weight=").append(weight);
         sb.append(", activityLevel=").append(activityLevel);
+        sb.append(", nutritionist=").append(nutritionist);
         sb.append('}');
         return sb.toString();
+    }
+
+    public Nutritionist getNutritionist() {
+        return nutritionist;
+    }
+
+    public void setNutritionist(Nutritionist nutritionist) {
+        this.nutritionist = nutritionist;
     }
 }

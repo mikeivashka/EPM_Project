@@ -5,10 +5,7 @@ import by.epam.entity.Product;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class DishDao extends Dao<Dish, String> {
     private static final String SELECT_ALL_DISHES = "SELECT * FROM dishes";
@@ -19,29 +16,53 @@ public class DishDao extends Dao<Dish, String> {
     private static final String GET_DISH_BY_ID = "SELECT * FROM dishes where title = ?";
     private static final String GET_INGREDIENTS_FOR_DISH = "SELECT product_title, product_weight from dish_ingredients where dish_title = ?";
     private static final String UPDATE = "UPDATE dishes SET recepylink = ?, calories_capacity = ? WHERE title = ?";
+    private static final String DELETE_INGREDIENTS = "DELETE FROM dish_ingredients WHERE dish_title = ?";
 
-    public static void update(@NotNull Product product) {
+    public static void update(@NotNull Dish dish) {
         try {
             var statement = connection.prepareStatement(UPDATE);
-            statement.setInt(1, product.getCaloriesCapacity());
-            statement.setString(2, product.getTitle());
+            statement.setString(1, dish.getRecepyLink());
+            statement.setInt(2, dish.getCaloriesCapacity());
+            statement.setString(3, dish.getTitle());
             statement.execute();
+            deleteIngredients(dish.getTitle());
+            insertIngredients(dish.getTitle(), dish.getIngredients());
         }
         catch (SQLException e){
             logger.error(e);
         }
     }
 
-/*    public static Optional<Product> getEntityById(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(GET_BY_ID);
+    private static void insertIngredients(String dish_title, Map<Product, Integer> map) throws SQLException{
+        var productstatement = connection.prepareStatement(INSERT_INGREDIENTS);
+        for (Product prod: map.keySet()) {
+            productstatement.setString(2, prod.getTitle());
+            productstatement.setString(1, dish_title);
+            productstatement.execute();
+        }
+    }
+
+    public static Optional<Dish> getEntityById(@NotNull String id) throws SQLException{
+        var statement = connection.prepareStatement(GET_DISH_BY_ID);
         statement.setString(1, id);
         var resultSet = statement.executeQuery();
-        Product product = null;
-        if(!resultSet.isClosed()) product = new Product(
-                resultSet.getString(1),
-                resultSet.getInt(2));
-        return Optional.ofNullable(product);
-    }*/
+        Dish dish = null;
+        if(!resultSet.isClosed()) {
+            dish = new Dish(
+                    id,
+                    getIngredients(id),
+                    resultSet.getInt("calories_capacity"),
+                    resultSet.getString("recepylink")
+            );
+        }
+        return Optional.ofNullable(dish);
+    }
+
+    private static void deleteIngredients(String dish_title) throws SQLException{
+        var statement = connection.prepareStatement(DELETE_INGREDIENTS);
+        statement.setString(1, dish_title);
+        statement.execute();
+    }
 
     public static void delete(@NotNull String id) throws SQLException{
         var statement = connection.prepareStatement(DELETE);
@@ -51,17 +72,14 @@ public class DishDao extends Dao<Dish, String> {
 
     public static void create(@NotNull Dish entity) throws SQLException{
         var dishstatement = connection.prepareStatement(INSERT_DISH);
-        var productstatement = connection.prepareStatement(INSERT_INGREDIENTS);
+
         dishstatement.setString(1, entity.getTitle());
         dishstatement.setString(2, entity.getRecepyLink());
         dishstatement.setInt(3, entity.getCaloriesCapacity());
         dishstatement.execute();
         var ingredients = entity.getIngredients();
-        for (Product prod: ingredients.keySet()) {
-            productstatement.setString(2, prod.getTitle());
-            productstatement.setString(1, entity.getTitle());
-            productstatement.execute();
-        }
+        insertIngredients(entity.getTitle(), entity.getIngredients());
+
     }
 
     private static HashMap<Product, Integer> getIngredients(@NotNull String title) throws SQLException{
@@ -69,7 +87,7 @@ public class DishDao extends Dao<Dish, String> {
         statement.setString(1, title);
         var resultSet = statement.executeQuery();
         var ingredients = new HashMap<Product, Integer>();
-        Integer weight = 0;
+        int weight;
         String curtitle;
         while (resultSet.next()){
             curtitle = resultSet.getString(1);
@@ -93,7 +111,6 @@ public class DishDao extends Dao<Dish, String> {
                         )
                 );
             }
-            return result;
         }
         catch (SQLException e){
             logger.error("Failed to execute statement");
