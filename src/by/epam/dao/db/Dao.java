@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public abstract class Dao<E extends Entity, K> {
@@ -20,4 +20,10 @@ public abstract class Dao<E extends Entity, K> {
             System.exit(-1);
         }
     }
+
+    public abstract void update(E entity) throws SQLException;
+    public abstract void delete(K key) throws SQLException;
+    public abstract ArrayList<E> getAll() throws SQLException;
+    public abstract void create(E entity) throws SQLException;
+    public abstract Optional<E> getEntityById(K key) throws SQLException;
 }

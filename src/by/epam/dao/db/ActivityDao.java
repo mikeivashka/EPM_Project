@@ -4,6 +4,7 @@ import by.epam.collections.TrainingType;
 import by.epam.entity.Activity;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -15,21 +16,16 @@ public class ActivityDao extends Dao<Activity, Integer> {
     private static final String GET_BY_ID = "SELECT * FROM activity where Id = ?";
     private static final String UPDATE = "UPDATE activity SET Type = ?, Link = ?, Description = ? WHERE Id = ?";
 
-    public static void update(Activity entity) {
-        try {
-            var statement = connection.prepareStatement(UPDATE);
-            statement.setString(1, entity.getType().toString());
-            statement.setString(2, entity.getLink());
-            statement.setString(3, entity.getDescription());
-            statement.setInt(4, entity.getId());
-            statement.execute();
-        }
-        catch (SQLException e){
-            logger.error(e);
-        }
+    public void update(Activity entity) throws SQLException {
+        var statement = connection.prepareStatement(UPDATE);
+        statement.setString(1, entity.getType().toString());
+        statement.setString(2, entity.getLink());
+        statement.setString(3, entity.getDescription());
+        statement.setInt(4, entity.getId());
+        statement.execute();
     }
 
-    public static Optional<Activity> getEntityById(Integer id) throws SQLException{
+    public Optional<Activity> getEntityById(Integer id) throws SQLException{
         var statement = connection.prepareStatement(GET_BY_ID);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
@@ -43,13 +39,13 @@ public class ActivityDao extends Dao<Activity, Integer> {
         return Optional.ofNullable(activity);
     }
 
-    public static void delete(Integer id) throws SQLException{
+    public  void delete(Integer id) throws SQLException{
         PreparedStatement statement = connection.prepareStatement(DELETE);
         statement.setInt(1, id);
         statement.execute();
     }
 
-    public static void create(Activity entity) throws SQLException{
+    public  void create(Activity entity) throws SQLException{
         PreparedStatement statement = connection.prepareStatement(INSERT_FULL);
         statement.setString(1, entity.getType().toString());
         statement.setString(2, entity.getLink());
@@ -57,9 +53,9 @@ public class ActivityDao extends Dao<Activity, Integer> {
         statement.execute();
     }
 
-    public static List<Activity> getAll() {
-        var result = new LinkedList<Activity>();
-        try (Statement statement = connection.createStatement()) {
+    public ArrayList<Activity> getAll() throws SQLException{
+        var result = new ArrayList<Activity>();
+        var statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_ALL);
             while(resultSet.next()){
                 result.add(
@@ -71,11 +67,6 @@ public class ActivityDao extends Dao<Activity, Integer> {
                                 )
                 );
             }
-        }
-        catch (SQLException e){
-            logger.error("Failed to execute statement");
-            logger.error(e);
-        }
         return result;
 
     }

@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class NutritionistBuilder {
     private static Logger log = LogManager.getLogger();
 
-    public static Nutritionist getNutritionist(String email, String name, String surname, Date experience, Double rating){
+    public static Nutritionist getNutritionist(String email, String name, String surname, Integer experience, Double rating){
         Nutritionist ob = new Nutritionist();
         ob.setEmail(email);
         ob.setName(name);
@@ -37,8 +37,8 @@ public class NutritionistBuilder {
 
             System.out.println("start year");
             int year = scan.nextInt();
-            Date start = new GregorianCalendar(01, 01, year).getTime();
-            return getNutritionist(email, name, surname, start, rating);
+            //Date start = new GregorianCalendar(01, 01, year).getTime();
+            return getNutritionist(email, name, surname, 0, rating);
         }catch (Exception e){
             log.log(Level.ERROR, "Failed to create object");
             throw new IOException();
