@@ -7,12 +7,14 @@ import by.epam.entity.Nutritionist;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class ClientDao extends Dao<Client, String>{
     private static final String SELECT_ALL = "SELECT * FROM clients";
+    private static final String SELECT_CLIENTS_FOR_NUTRITIONIST = "SELECT email, name, surname, weight, height, activity_level, age, nutritionist, gender FROM clients WHERE nutritionist = ?";
     private static final String INSERT_FULL = "INSERT INTO clients VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String DELETE = "DELETE FROM clients where email = ?";
     private static final String GET_BY_ID = "SELECT * FROM clients where email = ?";
@@ -34,6 +36,29 @@ public class ClientDao extends Dao<Client, String>{
         catch (SQLException e){
             logger.error(e);
         }
+    }
+
+    public static ArrayList<Client> getClientsForNutritionist(Nutritionist ob) throws SQLException{
+        var statement = connection.prepareStatement(SELECT_CLIENTS_FOR_NUTRITIONIST);
+        statement.setString(1, ob.getEmail());
+        var resultSet = statement.executeQuery();
+        var result = new ArrayList<Client>();
+        while(resultSet.next()){
+            result.add(
+                    new Client(
+                            resultSet.getString("email"),
+                            resultSet.getString("name"),
+                            resultSet.getString("surname"),
+                            resultSet.getInt("age"),
+                            Gender.valueOf(resultSet.getString("gender")),
+                            resultSet.getInt("height"),
+                            resultSet.getDouble("weight"),
+                            ActivityLevel.valueOf(resultSet.getString("activity_level")),
+                            NutritionistDao.getEntityById(resultSet.getString("nutritionist")).get()
+                    )
+            );
+        }
+        return result;
     }
 
     public static Optional<Client> getEntityById(@NotNull String email) throws SQLException{
