@@ -35,10 +35,6 @@ public class ActivityBuilder {
                     trainingType = TrainingType.POWER;
                     break;
                 }
-                case 2:{
-                    trainingType = TrainingType.CARDIO;
-                    break;
-                }
                 default: {
                     trainingType = TrainingType.CARDIO;
                     break;

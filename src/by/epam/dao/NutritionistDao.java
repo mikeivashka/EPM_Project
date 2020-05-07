@@ -1,12 +1,10 @@
-package by.epam.dao.db;
+package by.epam.dao;
 
 import by.epam.entity.Nutritionist;
-import by.epam.entity.Product;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Optional;
 
 public class NutritionistDao extends Dao<Nutritionist, String>{

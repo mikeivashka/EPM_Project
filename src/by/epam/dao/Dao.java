@@ -1,4 +1,4 @@
-package by.epam.dao.db;
+package by.epam.dao;
 import by.epam.entity.Entity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

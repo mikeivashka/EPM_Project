@@ -1,12 +1,10 @@
-package by.epam.dao.db;
+package by.epam.dao;
 
 import by.epam.entity.Product;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 public class ProductDao extends Dao<Product, String> {
@@ -47,25 +45,19 @@ public class ProductDao extends Dao<Product, String> {
         statement.execute();
     }
 
-    public ArrayList<Product> getAll() {
+    public ArrayList<Product> getAll() throws SQLException{
         var result = new ArrayList<Product>();
-        try (var statement = connection.createStatement()) {
-            var resultSet = statement.executeQuery(SELECT_ALL);
-            while(resultSet.next()){
-                result.add(
-                        new Product(
-                                resultSet.getString(1),
-                                resultSet.getInt(2)
-                        )
-                );
-            }
-        }
-        catch (SQLException e){
-            logger.error("Failed to execute statement");
-            logger.error(e);
+        var statement = connection.createStatement();
+        var resultSet = statement.executeQuery(SELECT_ALL);
+        while(resultSet.next()){
+            result.add(
+                    new Product(
+                            resultSet.getString(1),
+                            resultSet.getInt(2)
+                    )
+            );
         }
         return result;
-
     }
 }
 

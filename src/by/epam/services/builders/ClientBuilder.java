@@ -10,9 +10,9 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class BaseUserBuilder {
+public class ClientBuilder {
     private static Logger log = LogManager.getLogger();
-    public Client getBaseUser(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
+    public Client getClient(String email, String name, String surname, ActivityLevel activityLevel, Integer age, Gender gender, Integer height, Double weight){
         Client ob = new Client();
         ob.setAge(age);
         ob.setActivityLevel(activityLevel);
@@ -36,10 +36,6 @@ public class BaseUserBuilder {
             Gender gender;
             System.out.println("Gender:\n 1. male\n2.female");
             switch (scan.nextInt()) {
-                case 1: {
-                    gender = Gender.MALE;
-                    break;
-                }
                 case 2: {
                     gender = Gender.FEMALE;
                     break;
@@ -53,10 +49,6 @@ public class BaseUserBuilder {
             ActivityLevel aLevel;
             System.out.println("Activity level\n: 1.NONE\n2.SEDENTARY\n3.LIGHTLY_ACTIVE\n4.MODERATELY_ACTIVE\n5.VERY_ACTIVE");
             switch (scan.nextInt()) {
-                case 1: {
-                    aLevel = ActivityLevel.NONE;
-                    break;
-                }
                 case 2: {
                     aLevel = ActivityLevel.SEDENTARY;
                     break;
@@ -84,7 +76,7 @@ public class BaseUserBuilder {
             Integer height = scan.nextInt();
             System.out.println("weight(double): ");
             Double weight = scan.nextDouble();
-            return getBaseUser(email, name, surname, aLevel, age, gender, height, weight);
+            return getClient(email, name, surname, aLevel, age, gender, height, weight);
         } catch (Exception e){
             log.log(Level.ERROR, "Failed to create object");
             throw new IOException();

@@ -85,7 +85,7 @@ public class Client extends AbstractUser {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("BaseUser{");
+        final StringBuilder sb = new StringBuilder("Client{");
         sb.append(super.toString());
         sb.append(",age=").append(age);
         sb.append(", gender=").append(gender);

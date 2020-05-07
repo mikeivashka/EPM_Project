@@ -1,4 +1,4 @@
-package by.epam.dao.db;
+package by.epam.dao;
 
 import by.epam.collections.ActivityLevel;
 import by.epam.collections.Gender;
@@ -8,8 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 public class ClientDao extends Dao<Client, String>{

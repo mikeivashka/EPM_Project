@@ -1,4 +1,4 @@
-package by.epam.dao.db;
+package by.epam.dao;
 
 import by.epam.entity.Dish;
 import by.epam.entity.Product;

@@ -1,12 +1,10 @@
-package by.epam.dao.db;
+package by.epam.dao;
 
 import by.epam.collections.TrainingType;
 import by.epam.entity.Activity;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 public class ActivityDao extends Dao<Activity, Integer> {

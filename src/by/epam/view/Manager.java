@@ -22,7 +22,7 @@ public class Manager {
     public void productManager(){
 
         ProductService productService = new ProductService();
-        Integer choice;
+        int choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
@@ -68,13 +68,13 @@ public class Manager {
                 break;
             }
             default:{
-                return;
+                break;
             }
         }
     }
 
     public void dishManager(){
-        Integer choice;
+        int choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
@@ -119,13 +119,13 @@ public class Manager {
                 break;
             }
             default:{
-                return;
+                break;
             }
         }
     }
 
     public void activityManager(){
-        Integer choice;
+        int choice;
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
@@ -174,14 +174,14 @@ public class Manager {
                 break;
             }
             default:{
-                return;
+                break;
             }
         }
     }
 
     public void baseUserManager() {
-        Integer choice;
-        BaseUserService userService = new BaseUserService();
+        int choice;
+        ClientService userService = new ClientService();
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         if(!scan.hasNextInt()){
             System.out.println("Waiting for integer value");
@@ -191,7 +191,7 @@ public class Manager {
         switch (choice){
             case 1:{
                 try{
-                    userService.add(new BaseUserBuilder().consoleBuilder());
+                    userService.add(new ClientBuilder().consoleBuilder());
                 }catch (IOException e){
                     logger.error("Operation failed, try again later");
                 }
@@ -199,7 +199,7 @@ public class Manager {
             }
             case 2:{
                 try{
-                    userService.update(new BaseUserBuilder().consoleBuilder());
+                    userService.update(new ClientBuilder().consoleBuilder());
                 }catch (IOException e){
                     logger.error("En error occurred");
                 }
@@ -224,12 +224,12 @@ public class Manager {
                 break;
             }
             default:
-                return;
+                break;
         }
     }
 
     public void nutritionistManager() {
-        Integer choice;
+        int choice;
         NutritionistService service = new NutritionistService();
         System.out.println("1. Create \n2. Update\n3. Delete \n4. Show all\n0. Exit");
         try{
@@ -276,7 +276,7 @@ public class Manager {
                 }
                 break;
             }
-            default: return;
+            default: break;
         }
     }
 }

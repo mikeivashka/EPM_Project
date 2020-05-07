@@ -1,32 +1,34 @@
 package by.epam.services;
 
+import by.epam.dao.ClientDao;
+import by.epam.entity.Client;
 
-import by.epam.dao.ActivityDao;
-import by.epam.entity.Activity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class ActivityService implements Service<Activity, ActivityDao, Integer>{
-    private static ActivityDao dao = new ActivityDao();
+import org.apache.logging.log4j.LogManager;
+
+import org.apache.logging.log4j.Logger;
+
+public class ClientService implements Service<Client, ClientDao, String> {
+    private static ClientDao dao = new ClientDao();
     private static Logger logger = LogManager.getLogger(System.in);
+
     @Override
-    public Optional<Activity> getEntityByKey(Integer integer) {
+    public Optional<Client> getEntityByKey(String key) {
         try{
-            return dao.getEntityById(integer);
+            return dao.getEntityById(key);
         }
         catch (SQLException e){
             logger.error("Error on database level");
             logger.error(e);
             return Optional.ofNullable(null);
         }
-
     }
 
     @Override
-    public boolean add(Activity ob) {
+    public boolean add(Client ob) {
         try {
             dao.create(ob);
             return true;
@@ -39,7 +41,7 @@ public class ActivityService implements Service<Activity, ActivityDao, Integer>{
     }
 
     @Override
-    public ArrayList<Activity> getAll() {
+    public ArrayList<Client> getAll() {
         try {
             return dao.getAll();
         }
@@ -51,7 +53,7 @@ public class ActivityService implements Service<Activity, ActivityDao, Integer>{
     }
 
     @Override
-    public boolean update(Activity entity) {
+    public boolean update(Client entity) {
         try {
             dao.update(entity);
             return true;
@@ -61,13 +63,12 @@ public class ActivityService implements Service<Activity, ActivityDao, Integer>{
             logger.error(e);
             return false;
         }
-
     }
 
     @Override
-    public boolean delete(Integer integer) {
+    public boolean delete(String key) {
         try {
-            dao.delete(integer);
+            dao.delete(key);
             return true;
         }
         catch (SQLException e){
