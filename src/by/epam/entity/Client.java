@@ -13,11 +13,15 @@ public class Client extends AbstractUser {
     private Nutritionist nutritionist;
 
 
+
     public Client(){
         super();
     }
 
-    public Client(int age, Gender gender, int height, double weight, ActivityLevel activityLevel, Nutritionist nutritionist) {
+    public Client(String email, String name, String surname, int age, Gender gender, int height, double weight, ActivityLevel activityLevel, Nutritionist nutritionist) {
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
         this.age = age;
         this.gender = gender;
         this.height = height;

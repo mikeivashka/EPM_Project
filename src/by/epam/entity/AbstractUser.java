@@ -3,9 +3,9 @@ package by.epam.entity;
 import java.util.StringJoiner;
 
 public abstract class AbstractUser extends Entity {
-    private String name;
-    private String surname;
-    private String email;
+    protected String name;
+    protected String surname;
+    protected String email;
     private static final long serialVersionUID = 1L;
 
     public AbstractUser() {

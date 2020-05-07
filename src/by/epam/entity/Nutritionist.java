@@ -1,17 +1,27 @@
 package by.epam.entity;
 
-import java.util.Date;
 import java.util.StringJoiner;
 
 public class Nutritionist extends AbstractUser {
-    private Date experience;
+    private Integer experience;
     private double rating;
 
-    public Date getExperience() {
+    public Nutritionist() {
+    }
+
+    public Nutritionist(String email, String name, String surname, Integer experience, double rating) {
+        this.email = email;
+        this.experience = experience;
+        this.rating = rating;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(Date experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 
