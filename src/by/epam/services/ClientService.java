@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 
 import org.apache.logging.log4j.Logger;
 
-public class ClientService implements Service<Client, ClientDao, String> {
+public class ClientService implements Crudable<Client, ClientDao, String> {
     private static ClientDao dao = new ClientDao();
     private static Logger logger = LogManager.getLogger(System.in);
 

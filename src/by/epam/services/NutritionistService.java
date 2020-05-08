@@ -1,6 +1,5 @@
 package by.epam.services;
 
-import by.epam.dao.ActivityDao;
 import by.epam.dao.NutritionistDao;
 import by.epam.entity.Nutritionist;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class NutritionistService implements Service<Nutritionist, NutritionistDao, String> {
+public class NutritionistService implements Crudable<Nutritionist, NutritionistDao, String> {
     private static NutritionistDao dao = new NutritionistDao();
     private static Logger logger = LogManager.getLogger(System.in);
     @Override

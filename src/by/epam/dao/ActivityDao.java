@@ -15,7 +15,7 @@ public class ActivityDao extends Dao<Activity, Integer> {
     private static final String UPDATE = "UPDATE activity SET Type = ?, Link = ?, Description = ? WHERE Id = ?";
 
     public void update(Activity entity) throws SQLException {
-        var statement = connection.prepareStatement(UPDATE);
+        var statement = getConnection().prepareStatement(UPDATE);
         statement.setString(1, entity.getType().toString());
         statement.setString(2, entity.getLink());
         statement.setString(3, entity.getDescription());
@@ -24,7 +24,7 @@ public class ActivityDao extends Dao<Activity, Integer> {
     }
 
     public Optional<Activity> getEntityById(Integer id) throws SQLException{
-        var statement = connection.prepareStatement(GET_BY_ID);
+        var statement = getConnection().prepareStatement(GET_BY_ID);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
         Activity activity = null;
@@ -38,13 +38,13 @@ public class ActivityDao extends Dao<Activity, Integer> {
     }
 
     public  void delete(Integer id) throws SQLException{
-        PreparedStatement statement = connection.prepareStatement(DELETE);
+        PreparedStatement statement = getConnection().prepareStatement(DELETE);
         statement.setInt(1, id);
         statement.execute();
     }
 
     public  void create(Activity entity) throws SQLException{
-        PreparedStatement statement = connection.prepareStatement(INSERT_FULL);
+        PreparedStatement statement = getConnection().prepareStatement(INSERT_FULL);
         statement.setString(1, entity.getType().toString());
         statement.setString(2, entity.getLink());
         statement.setString(3, entity.getDescription());
@@ -53,7 +53,7 @@ public class ActivityDao extends Dao<Activity, Integer> {
 
     public ArrayList<Activity> getAll() throws SQLException{
         var result = new ArrayList<Activity>();
-        var statement = connection.createStatement();
+        var statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_ALL);
             while(resultSet.next()){
                 result.add(

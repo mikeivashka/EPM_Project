@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class ActivityService implements Service<Activity, ActivityDao, Integer>{
+public class ActivityService implements Crudable<Activity, ActivityDao, Integer> {
     private static ActivityDao dao = new ActivityDao();
     private static Logger logger = LogManager.getLogger(System.in);
     @Override

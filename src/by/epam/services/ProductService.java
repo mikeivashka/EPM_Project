@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 
-public class ProductService implements Service<Product, ProductDao, String> {
+public class ProductService implements Crudable<Product, ProductDao, String> {
     private static ProductDao dao = new ProductDao();
     private static Logger logger = LogManager.getLogger(System.in);
     @Override

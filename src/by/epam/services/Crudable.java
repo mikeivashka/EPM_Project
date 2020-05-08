@@ -4,7 +4,7 @@ import by.epam.entity.Entity;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public interface Service<E extends Entity, DAO extends Dao<E, KEY>, KEY> {
+public interface Crudable<E extends Entity, DAO extends Dao<E, KEY>, KEY> {
 
     Optional<E> getEntityByKey(KEY key);
 

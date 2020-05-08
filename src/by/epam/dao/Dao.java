@@ -1,5 +1,6 @@
 package by.epam.dao;
 import by.epam.entity.Entity;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,17 +9,15 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public abstract class Dao<E extends Entity, K> {
-    protected static Connection connection;
     protected static Logger logger = LogManager.getLogger();
+    private static BasicDataSource ds = new BasicDataSource();
     static {
-        try {
-            DriverManager.registerDriver(new org.sqlite.JDBC());
-            connection = DriverManager.getConnection("jdbc:sqlite:database\\dietmanager.db");
-        } catch (SQLException e) {
-            logger.error("Cannot establish connection to database");
-            logger.error(e);
-            System.exit(-1);
-        }
+        ds.setUrl("jdbc:sqlite:database\\dietmanager.db");
+        ds.setMaxOpenPreparedStatements(100);
+    }
+
+    protected static Connection getConnection() throws SQLException {
+        return ds.getConnection();
     }
 
     public abstract void update(E entity) throws SQLException;

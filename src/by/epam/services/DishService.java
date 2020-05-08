@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class DishService implements Service<Dish, DishDao, String>{
+public class DishService implements Crudable<Dish, DishDao, String> {
     private static DishDao dao = new DishDao();
     private static Logger logger = LogManager.getLogger(System.in);
     @Override

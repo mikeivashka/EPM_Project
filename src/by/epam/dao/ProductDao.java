@@ -15,14 +15,14 @@ public class ProductDao extends Dao<Product, String> {
     private static final String UPDATE = "UPDATE products SET calories_capacity = ? WHERE title = ?";
 
     public void update(@NotNull Product product) throws SQLException {
-        var statement = connection.prepareStatement(UPDATE);
+        var statement = getConnection().prepareStatement(UPDATE);
         statement.setInt(1, product.getCaloriesCapacity());
         statement.setString(2, product.getTitle());
         statement.execute();
     }
 
     public Optional<Product> getEntityById(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(GET_BY_ID);
+        var statement = getConnection().prepareStatement(GET_BY_ID);
         statement.setString(1, id);
         var resultSet = statement.executeQuery();
         Product product = null;
@@ -33,13 +33,13 @@ public class ProductDao extends Dao<Product, String> {
     }
 
     public void delete(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(DELETE);
+        var statement = getConnection().prepareStatement(DELETE);
         statement.setString(1, id);
         statement.execute();
     }
 
     public void create(@NotNull Product entity) throws SQLException{
-        var statement = connection.prepareStatement(INSERT_FULL);
+        var statement = getConnection().prepareStatement(INSERT_FULL);
         statement.setString(1, entity.getTitle());
         statement.setInt(2, entity.getCaloriesCapacity());
         statement.execute();
@@ -47,7 +47,7 @@ public class ProductDao extends Dao<Product, String> {
 
     public ArrayList<Product> getAll() throws SQLException{
         var result = new ArrayList<Product>();
-        var statement = connection.createStatement();
+        var statement = getConnection().createStatement();
         var resultSet = statement.executeQuery(SELECT_ALL);
         while(resultSet.next()){
             result.add(

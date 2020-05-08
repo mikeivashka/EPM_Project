@@ -6,6 +6,7 @@ import by.epam.entity.Client;
 import by.epam.entity.Nutritionist;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public class ClientDao extends Dao<Client, String>{
     private static final String UPDATE = "UPDATE clients SET name = ?, surname = ?, age = ?,weight = ?, height = ?, activity_level = ?, gender = ?, nutritionist = ? WHERE email = ?";
 
     public void update(@NotNull Client client) throws SQLException {
-        var statement = connection.prepareStatement(UPDATE);
+        var statement = getConnection().prepareStatement(UPDATE);
         statement.setString(1, client.getName());
         statement.setString(2, client.getSurname());
         statement.setInt(3, client.getAge());
@@ -31,56 +32,50 @@ public class ClientDao extends Dao<Client, String>{
         statement.execute();
     }
 
+    private Client getClient(ResultSet set) throws SQLException{
+        return new Client(
+                set.getString("email"),
+                set.getString("name"),
+                set.getString("surname"),
+                set.getInt("age"),
+                Gender.valueOf(set.getString("gender")),
+                set.getInt("height"),
+                set.getDouble("weight"),
+                ActivityLevel.valueOf(set.getString("activity_level")),
+                new NutritionistDao().getEntityById(set.getString("nutritionist")).get()
+        );
+    }
+
     public ArrayList<Client> getClientsForNutritionist(Nutritionist ob) throws SQLException{
-        var statement = connection.prepareStatement(SELECT_CLIENTS_FOR_NUTRITIONIST);
+        var statement = getConnection().prepareStatement(SELECT_CLIENTS_FOR_NUTRITIONIST);
         statement.setString(1, ob.getEmail());
         var resultSet = statement.executeQuery();
         var result = new ArrayList<Client>();
         while(resultSet.next()){
             result.add(
-                    new Client(
-                            resultSet.getString("email"),
-                            resultSet.getString("name"),
-                            resultSet.getString("surname"),
-                            resultSet.getInt("age"),
-                            Gender.valueOf(resultSet.getString("gender")),
-                            resultSet.getInt("height"),
-                            resultSet.getDouble("weight"),
-                            ActivityLevel.valueOf(resultSet.getString("activity_level")),
-                            new NutritionistDao().getEntityById(resultSet.getString("nutritionist")).get()
-                    )
+                    getClient(resultSet)
             );
         }
         return result;
     }
 
     public Optional<Client> getEntityById(@NotNull String email) throws SQLException{
-        var statement = connection.prepareStatement(GET_BY_ID);
+        var statement = getConnection().prepareStatement(GET_BY_ID);
         statement.setString(1, email);
         var resultSet = statement.executeQuery();
         Client client = null;
-        if(!resultSet.isClosed()) client = new Client(
-                resultSet.getString("email"),
-                resultSet.getString("name"),
-                resultSet.getString("surname"),
-                resultSet.getInt("age"),
-                Gender.valueOf(resultSet.getString("gender")),
-                resultSet.getInt("height"),
-                resultSet.getDouble("weight"),
-                ActivityLevel.valueOf(resultSet.getString("activity_level")),
-                new NutritionistDao().getEntityById(resultSet.getString("nutritionist")).get()
-        );
+        if(!resultSet.isClosed()) client = getClient(resultSet);
         return Optional.ofNullable(client);
     }
 
     public void delete(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(DELETE);
+        var statement = getConnection().prepareStatement(DELETE);
         statement.setString(1, id);
         statement.execute();
     }
 
     public void create(@NotNull Client client) throws SQLException{
-        var statement = connection.prepareStatement(INSERT_FULL);
+        var statement = getConnection().prepareStatement(INSERT_FULL);
         statement.setString(1, client.getEmail());
         statement.setString(2, client.getName());
         statement.setString(3, client.getSurname());
@@ -95,21 +90,11 @@ public class ClientDao extends Dao<Client, String>{
 
     public ArrayList<Client> getAll() throws SQLException{
         var result = new ArrayList<Client>();
-        var statement = connection.createStatement();
+        var statement = getConnection().createStatement();
         var resultSet = statement.executeQuery(SELECT_ALL);
         while(resultSet.next()){
             result.add(
-                    new Client(
-                            resultSet.getString("email"),
-                            resultSet.getString("name"),
-                            resultSet.getString("surname"),
-                            resultSet.getInt("age"),
-                            Gender.valueOf(resultSet.getString("gender")),
-                            resultSet.getInt("height"),
-                            resultSet.getDouble("weight"),
-                            ActivityLevel.valueOf(resultSet.getString("activity_level")),
-                            new NutritionistDao().getEntityById(resultSet.getString("nutritionist")).get()
-                    )
+                    getClient(resultSet)
             );
         }
         return result;

@@ -19,7 +19,7 @@ public class DishDao extends Dao<Dish, String> {
     private static final String DELETE_INGREDIENTS = "DELETE FROM dish_ingredients WHERE dish_title = ?";
 
     public void update(@NotNull Dish dish) throws SQLException {
-        var statement = connection.prepareStatement(UPDATE);
+        var statement = getConnection().prepareStatement(UPDATE);
         statement.setString(1, dish.getRecepyLink());
         statement.setInt(2, dish.getCaloriesCapacity());
         statement.setString(3, dish.getTitle());
@@ -29,7 +29,7 @@ public class DishDao extends Dao<Dish, String> {
     }
 
     private void insertIngredients(String dish_title, Map<Product, Integer> map) throws SQLException{
-        var productstatement = connection.prepareStatement(INSERT_INGREDIENTS);
+        var productstatement = getConnection().prepareStatement(INSERT_INGREDIENTS);
         for (Product prod: map.keySet()) {
             productstatement.setString(2, prod.getTitle());
             productstatement.setString(1, dish_title);
@@ -39,7 +39,7 @@ public class DishDao extends Dao<Dish, String> {
     }
 
     public Optional<Dish> getEntityById(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(GET_DISH_BY_ID);
+        var statement = getConnection().prepareStatement(GET_DISH_BY_ID);
         statement.setString(1, id);
         var resultSet = statement.executeQuery();
         Dish dish = null;
@@ -55,19 +55,19 @@ public class DishDao extends Dao<Dish, String> {
     }
 
     private  void deleteIngredients(String dish_title) throws SQLException{
-        var statement = connection.prepareStatement(DELETE_INGREDIENTS);
+        var statement = getConnection().prepareStatement(DELETE_INGREDIENTS);
         statement.setString(1, dish_title);
         statement.execute();
     }
 
     public  void delete(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(DELETE);
+        var statement = getConnection().prepareStatement(DELETE);
         statement.setString(1, id);
         statement.execute();
     }
 
     public void create(@NotNull Dish entity) throws SQLException{
-        var dishstatement = connection.prepareStatement(INSERT_DISH);
+        var dishstatement = getConnection().prepareStatement(INSERT_DISH);
 
         dishstatement.setString(1, entity.getTitle());
         dishstatement.setString(2, entity.getRecepyLink());
@@ -79,7 +79,7 @@ public class DishDao extends Dao<Dish, String> {
     }
 
     private HashMap<Product, Integer> getIngredients(@NotNull String title) throws SQLException{
-        var statement = connection.prepareStatement(GET_INGREDIENTS_FOR_DISH);
+        var statement = getConnection().prepareStatement(GET_INGREDIENTS_FOR_DISH);
         statement.setString(1, title);
         var resultSet = statement.executeQuery();
         var ingredients = new HashMap<Product, Integer>();
@@ -96,7 +96,7 @@ public class DishDao extends Dao<Dish, String> {
     @Override
     public ArrayList<Dish> getAll() throws SQLException{
         var result = new ArrayList<Dish>();
-        var statement = connection.createStatement();
+        var statement = getConnection().createStatement();
         var resultDishesSet = statement.executeQuery(SELECT_ALL_DISHES);
         while(resultDishesSet.next()){
             result.add(

@@ -16,7 +16,7 @@ public class NutritionistDao extends Dao<Nutritionist, String>{
 
     @Override
     public void update(@NotNull Nutritionist nutritionist) throws SQLException {
-            var statement = connection.prepareStatement(UPDATE);
+            var statement = getConnection().prepareStatement(UPDATE);
             statement.setInt(1, nutritionist.getExperience());
             statement.setDouble(2, nutritionist.getRating());
             statement.setString(3, nutritionist.getName());
@@ -26,7 +26,7 @@ public class NutritionistDao extends Dao<Nutritionist, String>{
 
     @Override
     public Optional<Nutritionist> getEntityById(@NotNull String email) throws SQLException{
-        var statement = connection.prepareStatement(GET_BY_ID);
+        var statement = getConnection().prepareStatement(GET_BY_ID);
         statement.setString(1, email);
         var resultSet = statement.executeQuery();
         Nutritionist nutritionist = null;
@@ -41,13 +41,13 @@ public class NutritionistDao extends Dao<Nutritionist, String>{
     }
     @Override
     public void delete(@NotNull String id) throws SQLException{
-        var statement = connection.prepareStatement(DELETE);
+        var statement = getConnection().prepareStatement(DELETE);
         statement.setString(1, id);
         statement.execute();
     }
     @Override
     public void create(@NotNull Nutritionist entity) throws SQLException{
-        var statement = connection.prepareStatement(INSERT_FULL);
+        var statement = getConnection().prepareStatement(INSERT_FULL);
         statement.setString(1, entity.getEmail());
         statement.setInt(2, entity.getExperience());
         statement.setDouble(3, entity.getRating());
@@ -59,7 +59,7 @@ public class NutritionistDao extends Dao<Nutritionist, String>{
     @Override
     public ArrayList<Nutritionist> getAll() throws SQLException{
         var result = new ArrayList<Nutritionist>();
-        try (var statement = connection.createStatement()) {
+        try (var statement = getConnection().createStatement()) {
             var resultSet = statement.executeQuery(SELECT_ALL);
             while(resultSet.next()){
                 result.add(
