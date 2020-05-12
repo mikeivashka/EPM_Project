@@ -48,6 +48,7 @@
     <properties>
         <org.springframework.version>3.2.8.RELEASE</org.springframework.version>
         <maven.compiler.release>13</maven.compiler.release>
+        <maven.compiler.target>13</maven.compiler.target>
     </properties>
 
 
