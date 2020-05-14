@@ -21,8 +21,10 @@ public class ActivityController {
     private ActivityRepository activityRepository;
 
     @GetMapping
-    public String activity(Map<String, Object> model){
-        Iterable<Activity> activities = activityRepository.findAll();
+    public String activity(@RequestParam(name = "filter", required = false)String filter, Map<String, Object> model){
+        Iterable<Activity> activities =
+                (filter == null ? activityRepository.findAll() :
+                        activityRepository.findByType(TrainingType.valueOf(filter)) );
         model.put("activities", activities);
         return "activities";
     }
@@ -41,13 +43,12 @@ public class ActivityController {
         return "activities";
     }
 
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model){
-        Iterable<Activity> activities = activityRepository.findAll();
-        model.put("activities", activities);
-        List<Activity> filtered = activityRepository.findByType(TrainingType.valueOf(filter));
-        model.put("filtered", filtered);
-        return "activities";
-    }
+//    @PostMapping("filter")
+//    public String filter(@RequestParam String filter, Map<String, Object> model){
+//        Iterable<Activity> activities = activityRepository.findAll();
+//        List<Activity> filtered = activityRepository.findByType(TrainingType.valueOf(filter));
+//        model.put("activities", filtered);
+//        return "activities";
+//    }
 
 }

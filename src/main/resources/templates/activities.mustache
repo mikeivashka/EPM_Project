@@ -44,24 +44,16 @@
     </div>
         <div class="col-md-4">
             <h3>Отфильтровать по типу</h3>
-            <form method="post" action="filter">
+            <form method="get">
                 <p><input type="radio" name="filter" value="POWER"/>Силовая</p>
                 <p><input type="radio" name="filter" value="CARDIO"/>Кардио</p>
                 <p><input type="radio" name="filter" value="OTHER"/>Другое</p>
                 <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                 <button type="submit" class = "btn btn-primary" >Выбрать</button>
             </form>
-            <h3>
-                Результат:
-            </h3>
-            {{#filtered}}
-                <div>
-                    <p>Id: {{id}}</p>
-                    <p>{{type}}</p>
-                    <a href="{{link}}">Ссылка на тренировку</a>
-                    <p>{{description}}</p>
-                </div>
-            {{/filtered}}
+            <form method="get">
+                <button type="submit" class = "btn btn-light" >Отмена</button>
+            </form>
         </div>
 </div>
 </div>
