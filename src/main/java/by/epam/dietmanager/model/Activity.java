@@ -23,6 +23,10 @@ public class Activity{
         this.link = link;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public Activity() {
     }
 
