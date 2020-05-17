@@ -13,6 +13,7 @@ public class Client extends AbstractUser {
     private Gender gender;
     private int height;
     private double weight;
+    @Enumerated(EnumType.ORDINAL)
     private ActivityLevel activityLevel;
     @ManyToOne
     private Nutritionist nutritionist;

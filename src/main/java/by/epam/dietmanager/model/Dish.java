@@ -13,7 +13,7 @@ public class Dish implements Cloneable {
     @Id
     private Integer id;
     private String title;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "dish_ingredients",
             joinColumns = { @JoinColumn(name = "dish.id") },

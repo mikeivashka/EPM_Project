@@ -3,15 +3,14 @@ package by.epam.dietmanager.model;
 import by.epam.dietmanager.collections.Role;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.StringJoiner;
-import java.util.zip.DataFormatException;
+
 
 @Entity
 @Table(name="user_details")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class AbstractUser implements Serializable, Cloneable {
+public abstract class AbstractUser implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,24 +18,38 @@ public abstract class AbstractUser implements Serializable, Cloneable {
     private Integer id;
     @Column(name = "email", unique = true)
     protected String email;
-    @Column(name = "name")
+    @Column(name = "pwd")
+    private String password;
     protected String name;
-    @Column(name = "surname")
     protected String surname;
-    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     protected Role role;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
-    private boolean blocked = false;
+    private boolean active = true;
 
-
-    public boolean isBlocked() {
-        return blocked;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
+    public String getPassword() {
+        return password;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Role getRole() {

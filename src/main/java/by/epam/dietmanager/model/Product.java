@@ -12,7 +12,7 @@ public class Product implements Cloneable {
     private Integer id;
     private String title;
     private int caloriesCapacity;
-    @ManyToMany(mappedBy = "ingredients")
+    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
     private Set<Dish> dishes;
     public Product(){
     }
