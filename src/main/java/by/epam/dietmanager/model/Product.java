@@ -1,15 +1,20 @@
 package by.epam.dietmanager.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.StringJoiner;
 
-public class Product implements Serializable, Cloneable {
+@Entity
+public class Product implements Cloneable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    private Integer id;
     private String title;
     private int caloriesCapacity;
-    private static final long serialVersionUID = 1L;
-
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Dish> dishes;
     public Product(){
-        super();
     }
 
     public Product(String title, int caloriesCapacity) {

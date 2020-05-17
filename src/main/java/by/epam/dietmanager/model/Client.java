@@ -4,13 +4,17 @@ package by.epam.dietmanager.model;
 import by.epam.dietmanager.collections.ActivityLevel;
 import by.epam.dietmanager.collections.Gender;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "client")
 public class Client extends AbstractUser {
     private int age;
     private Gender gender;
     private int height;
     private double weight;
     private ActivityLevel activityLevel;
-    private static final long serialVersionUID = 1L;
+    @ManyToOne
     private Nutritionist nutritionist;
 
 

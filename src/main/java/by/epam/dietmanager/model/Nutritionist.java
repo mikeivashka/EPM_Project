@@ -1,11 +1,18 @@
 package by.epam.dietmanager.model;
 
-import java.util.StringJoiner;
+import org.springframework.security.core.userdetails.User;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringJoiner;
+@Entity
+@Table(name = "nutritionist")
 public class Nutritionist extends AbstractUser {
     private Integer experience;
     private double rating;
-
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Client> clients = new HashSet<>();
     public Nutritionist() {
     }
 

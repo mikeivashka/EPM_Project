@@ -1,19 +1,30 @@
 package by.epam.dietmanager.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 
-public class Dish implements Serializable, Cloneable {
-
+@Entity
+public class Dish implements Cloneable {
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    private Integer id;
     private String title;
-    private Map<Product, Integer> ingredients;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "dish_ingredients",
+            joinColumns = { @JoinColumn(name = "dish.id") },
+            inverseJoinColumns = { @JoinColumn(name = "product.id") }
+    )
+    private Set<Product> ingredients;
     private int caloriesCapacity;
     private String recepyLink;
     private static final long serialVersionUID = 1L;
 
-    public Dish(String title, Map<Product, Integer> ingredients, int caloriesCapacity, String recepyLink) {
+    public Dish(String title, Set<Product> ingredients, int caloriesCapacity, String recepyLink) {
         this.title = title;
         this.ingredients = ingredients;
         this.caloriesCapacity = caloriesCapacity;
@@ -40,12 +51,14 @@ public class Dish implements Serializable, Cloneable {
         return title.hashCode();
     }
 
-    public Map<Product, Integer> getIngredients() {
-        return ingredients;
+
+
+    public Set<Product> getIngredients() {
+        return Set.copyOf(ingredients);
     }
 
-    public void setIngredients(Map<Product, Integer> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredients(Set<Product> ingredients) {
+        this.ingredients = Set.copyOf(ingredients);
     }
 
     public int getCaloriesCapacity() {
