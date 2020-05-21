@@ -22,6 +22,8 @@ public class Client extends AbstractUser {
 
     public Client(){
         super();
+        activityLevel = ActivityLevel.NONE;
+        gender = Gender.MALE;
     }
 
     public Client(String email, String name, String surname, int age, Gender gender, int height, double weight, ActivityLevel activityLevel, Nutritionist nutritionist) {

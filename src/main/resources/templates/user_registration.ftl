@@ -9,7 +9,6 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <button id = "validate" type="submit" class="btn btn-primary" value="Sign In" style="margin-top: 10px">Зарегистрироваться</button>
 </form>
-    <#if message??>${message}</#if>
+    <#if message??>${message}<br></#if>
 <a href="/login">У меня уже есть аккаунт</a>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </@c.page>

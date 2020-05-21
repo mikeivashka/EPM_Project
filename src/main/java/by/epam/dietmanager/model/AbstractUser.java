@@ -31,6 +31,19 @@ public abstract class AbstractUser implements Cloneable, UserDetails {
     private Date createdOn;
     private boolean active = true;
 
+    @PrePersist
+    public void addTimestamp() {
+        createdOn = new Date();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(getRole());

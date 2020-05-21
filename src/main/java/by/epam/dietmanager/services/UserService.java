@@ -17,6 +17,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return (nutrRepo.findByEmail(email) == null ? clientRepo.findByEmail(email) : nutrRepo.findByEmail(email));
+        UserDetails usr = nutrRepo.findByEmail(email) == null ? clientRepo.findByEmail(email) : nutrRepo.findByEmail(email);
+        if (usr != null) return usr;
+        else throw new UsernameNotFoundException(email);
     }
 }

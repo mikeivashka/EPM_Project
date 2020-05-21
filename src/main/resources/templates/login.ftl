@@ -1,6 +1,5 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-<body>
 <h1>Авторизируйтесь, чтобы продолжить пользоваться dietmanager</h1>
 <form action="/login" method="post">
     <div><label>Email: <input type="email" name = "username"/></label></div>
