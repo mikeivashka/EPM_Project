@@ -35,18 +35,45 @@ public class DishController {
         return "";
     }
 
+    @GetMapping("add/product")
+    public  String getProdPage(){
+        return "add_prod";
+    }
+
+    @PostMapping("add/product")
+    public String addProd(
+            @RequestParam String title,
+            @RequestParam Integer calories,
+            Map<String, Object> model
+            ){
+        String successMsg = "Блюдо успешно добавлено";
+        String failureMsg = "Данное название уже занято, блюдо не создано";
+        if(prodRepo.findByTitle(title) == null){
+            Product product = new Product();
+            product.setCaloriesCapacity(calories);
+            product.setTitle(title);
+            prodRepo.save(product);
+            model.put("success", successMsg);
+        }
+        else{
+            model.put("failure", failureMsg);
+        }
+        return "add_prod";
+    }
+
     @GetMapping
     public String dishes(
             @RequestParam(required = false, defaultValue = "") String dish_name_filter,
             @RequestParam(required = false, defaultValue = "0") Integer minCalories,
             @RequestParam(required = false, defaultValue = "10000") Integer maxCalories,
-            @RequestParam(required = false) String prod_filter,
+            @RequestParam(required = false, defaultValue = "") String prod_filter,
             Map<String, Object> model
     ) {
         Iterable<Dish> dishes = dishRepo.findByTitleContainingIgnoreCaseAndCaloriesCapacityBetween(dish_name_filter, minCalories, maxCalories);
         Iterable<Product> products = prodRepo.findByTitleContainingIgnoreCase(prod_filter);
+        model.put("prod_filter",prod_filter);
         model.put("products", products);
         model.put("dishes", dishes);
-        return "activities";
+        return "dishes";
     }
 }

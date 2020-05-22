@@ -9,42 +9,47 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <#if known>
-                <#if role!="ADMIN">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/profile">Профиль</a>
-                    </li>
-                </#if>
-                <#if role=="CLIENT">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/program">Мой диетолог</a>
-                    </li>
-                </#if>
-                <#if role != "CLIENT">
-                    <#if role == "ADMIN">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user">Управление пользователями</a>
-                    </li>
+                <#if known>
+                    <#if role!="ADMIN">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/profile">Профиль</a>
+                        </li>
                     </#if>
-                    <li class="nav-item">
-                        <a class="nav-link" href="activities">Тренировки</a>
-                    </li>
+                    <#if role=="CLIENT">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/program">Мой диетолог</a>
+                        </li>
+                    </#if>
+                    <#if role != "CLIENT">
+                        <#if role == "ADMIN">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user">Управление пользователями</a>
+                            </li>
+                        </#if>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dishes">Блюда</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="activities">Тренировки</a>
+                        </li>
+                    </#if>
                 </#if>
-            </#if>
             </ul>
             <#if known>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle" style="background-color:transparent" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button class="btn dropdown-toggle" style="background-color:transparent" type="button"
+                            id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         ${name}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <#if user.role!="ADMIN">
-                        <li>
-                            <form action="/user/profile" method="get">
-                                <input class="btn"  style="background-color:transparent" type="submit" value="Профиль">
-                            </form>
-                        </li>
+                            <li>
+                                <form action="/user/profile" method="get">
+                                    <input class="btn" style="background-color:transparent" type="submit"
+                                           value="Профиль">
+                                </form>
+                            </li>
                         </#if>
                         <li role="separator" class="divider"></li>
                         <li>
