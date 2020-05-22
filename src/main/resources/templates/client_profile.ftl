@@ -11,7 +11,7 @@
 
             <div class="form-group col-md-6">
                 <label for="exampleInputPassword1">Пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                <input type="text" class="form-control" id="exampleInputPassword1" name="password"
                        value="${user.password}">
             </div>
         </div>

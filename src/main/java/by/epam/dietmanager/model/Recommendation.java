@@ -1,7 +1,6 @@
 package by.epam.dietmanager.model;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,6 +9,7 @@ public class Recommendation {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
+    @Column(length = 600)
     private String text;
     private Integer authorId;
     private Integer receiverId;
@@ -22,7 +22,9 @@ public class Recommendation {
     private Set<Dish> dishes;
     private Integer activityId;
     private Date date;
-    private Integer feedback;
+    private Integer mark;
+    @Column(length = 600)
+    private String feedback;
 
     public boolean isComplete() {
         return complete;
@@ -34,11 +36,19 @@ public class Recommendation {
 
     private boolean complete;
 
-    public Integer getFeedback() {
+    public Integer getMark() {
+        return mark;
+    }
+
+    public void setMark(Integer mark) {
+        this.mark = mark;
+    }
+
+    public String getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(Integer feedback) {
+    public void setFeedback(String feedback) {
         this.feedback = feedback;
     }
 

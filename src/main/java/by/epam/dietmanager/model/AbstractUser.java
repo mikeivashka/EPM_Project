@@ -140,10 +140,16 @@ public abstract class AbstractUser implements Cloneable, UserDetails {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", AbstractUser.class.getSimpleName() + "[", "]")
-                .add("name='" + name + "'")
-                .add("surname='" + surname + "'")
-                .add("email='" + email + "'")
-                .toString();
+        final StringBuilder sb = new StringBuilder("AbstractUser{");
+        sb.append("id=").append(id);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", role=").append(role);
+        sb.append(", createdOn=").append(createdOn);
+        sb.append(", active=").append(active);
+        sb.append('}');
+        return sb.toString();
     }
 }

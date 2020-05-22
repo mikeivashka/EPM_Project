@@ -2,17 +2,20 @@ package by.epam.dietmanager.controller;
 
 import by.epam.dietmanager.collections.ActivityLevel;
 import by.epam.dietmanager.collections.Gender;
+import by.epam.dietmanager.collections.Role;
 import by.epam.dietmanager.model.AbstractUser;
 import by.epam.dietmanager.model.Client;
 import by.epam.dietmanager.model.Nutritionist;
 import by.epam.dietmanager.repos.ClientRepository;
 import by.epam.dietmanager.repos.NutritionistRepository;
+import by.epam.dietmanager.services.UserService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dom4j.rule.Mode;
-import org.hibernate.annotations.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,32 +30,36 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class AccountController {
+    private static Logger logger = LogManager.getLogger();
     @Autowired
-    ClientRepository repository;
+    private UserService userService;
 
     @Autowired
-    NutritionistRepository nutrRepository;
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private NutritionistRepository nutrRepository;
 
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    public String userList(Model model){
+    public String userList(Model model) {
         List<AbstractUser> userList = new LinkedList<>();
-        userList.addAll(repository.findAll());
+        userList.addAll(clientRepository.findAll());
         userList.addAll(nutrRepository.findAll());
         model.addAttribute("users", userList);
         return "user_list";
     }
+
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping
-    public String changeActiveStatus(@RequestParam String id, @RequestParam (required = false)String active, @RequestParam String role){
+    public String changeActiveStatus(@RequestParam String id, @RequestParam(required = false) String active, @RequestParam String role) {
         Integer uid = Integer.valueOf(id);
-        if (role.equals("CLIENT")){
-            Client client = repository.getOne(uid);
+        if (role.equals("CLIENT")) {
+            Client client = clientRepository.getOne(uid);
             client.setActive(active == null ? false : true);
-            repository.save(client);
-        }
-        else {
+            clientRepository.save(client);
+        } else {
             Nutritionist nutritionist = nutrRepository.getOne(uid);
             nutritionist.setActive(active != null);
             nutrRepository.save(nutritionist);
@@ -62,55 +69,96 @@ public class AccountController {
 
     @PreAuthorize("hasAnyAuthority('CLIENT', 'NUTRITIONIST')")
     @GetMapping("profile")
-    public String getClientProfile(Model model, @AuthenticationPrincipal AbstractUser user){
-        if(user instanceof Client){
-            model.addAttribute("user", repository.getOne(user.getId()));
+    public String getProfile(Model model, @AuthenticationPrincipal AbstractUser user) {
+        if (user instanceof Client) {
+            model.addAttribute("user", clientRepository.getOne(user.getId()));
             return "client_profile";
-        }
-        else{
+        } else {
             model.addAttribute("user", nutrRepository.getOne(user.getId()));
             return "nutr_profile";
         }
     }
 
+//    @PostMapping("profile")
+//    @PreAuthorize("hasAnyAuthority('NUTRITIONIST')")
+//    public String saveNutritionist(@RequestParam("id") Nutritionist nutritionist,
+//                                   @RequestParam("email") String email,
+//                                   @RequestParam("password") String password,
+//                                   @RequestParam("name") String name,
+//                                   @RequestParam("surname") String surname,
+//                                   Map<String, Object> model) {
+//        nutritionist.setPassword(password);
+//        nutritionist.setSurname(surname);
+//        nutritionist.setName(name);
+//        if ((clientRepository.findByEmail(email) != null || nutrRepository.findByEmail(email) != null) && !email.equals(nutritionist.getEmail())) {
+//            model.put("message", "Данный e-mail уже занят, изменения не сохранены");
+//            model.put("user", nutritionist);
+//            return "nutr_profile";
+//        } else {
+//            nutritionist.setEmail(email);
+//        }
+//        nutrRepository.save(nutritionist);
+//        return "redirect:profile";
+//    }
+
 
     @PostMapping("profile")
-    public String save(@RequestParam("id") Client client,
+    @PreAuthorize("hasAnyAuthority('CLIENT', 'NUTRITIONIST')")
+    public String save(@RequestParam("id") Integer id,
                        @RequestParam("email") String email,
                        @RequestParam("password") String password,
                        @RequestParam("name") String name,
                        @RequestParam("surname") String surname,
-                       @RequestParam("age") Integer age,
-                       @RequestParam("gender") String gender,
-                       @RequestParam("activity") String activity,
-                       @RequestParam("weight") Double weight,
-                       @RequestParam("height") Integer height,
+                       @RequestParam(name = "age", required = false) Integer age,
+                       @RequestParam(name = "gender", required = false) String gender,
+                       @RequestParam(name = "activity", required = false) String activity,
+                       @RequestParam(name = "weight", required = false) Double weight,
+                       @RequestParam(name = "height", required = false) Integer height,
                        Map<String, Object> model
-                       ){
-        client.setActivityLevel(ActivityLevel.valueOf(activity));
-        client.setPassword(password);
-        client.setAge(age);
-        client.setSurname(surname);
-        client.setName(name);
-        client.setGender(Gender.valueOf(gender));
-        client.setWeight(weight);
-        client.setHeight(height);
-        if(( repository.findByEmail(email) != null || nutrRepository.findByEmail(email)!=null) && !email.equals(client.getEmail())){
-            model.put("message", "Данный e-mail уже занят, изменения не сохранены");
-            model.put("user", client);
-            return "client_profile";
+    ) {
+        AbstractUser user;
+        if(clientRepository.findById(id).isPresent()){
+            user = clientRepository.getOne(id);
         }
         else {
-            client.setEmail(email);
+            user = nutrRepository.getOne(id);
         }
-        repository.save(client);
-        return "redirect:profile";
-    }
+        String failureMsg = "Данный e-mail уже занят, изменения не сохранены";
+        boolean success = true;
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPassword(password);
+        if (userService.validateForEmailDuplicates(email, id)) {
+            user.setEmail(email);
+        } else
+            success = false;
+        if (user.getRole() == Role.CLIENT) {
+            Client client = (Client) user;
+            client.setActivityLevel(ActivityLevel.valueOf(activity));
+            client.setAge(age);
+            client.setGender(Gender.valueOf(gender));
+            client.setWeight(weight);
+            client.setHeight(height);
+            if (success) {
+                clientRepository.save(client);
+            }
+        } else if (success) {
+            nutrRepository.save((Nutritionist) user);
+        }
+        model.put("user", user);
+        if (success) {
+            logger.info("User successfully updated:" + user);
+            return "redirect:profile";
+        }
+        else {
+            model.put("message", failureMsg);
+            if(user.getRole() == Role.CLIENT){
+                return "client_profile";
+            }
+            else {
+                return "nutr_profile";
+            }
+        }
 
-//    @PreAuthorize("hasAnyAuthority('NUTRITIONIST')")
-//    @GetMapping("profile")
-//    public String getProfile(Model model, @AuthenticationPrincipal Nutritionist nutr){
-//        model.addAttribute("user", nutr);
-//        return "client_profile";
-//    }
+    }
 }

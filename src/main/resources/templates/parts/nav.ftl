@@ -10,10 +10,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             <#if known>
-                <#if role == "CLIENT">
+                <#if role!="ADMIN">
                     <li class="nav-item">
                         <a class="nav-link" href="/user/profile">Профиль</a>
                     </li>
+                </#if>
+                <#if role=="CLIENT">
                     <li class="nav-item">
                         <a class="nav-link" href="/user/program">Мой диетолог</a>
                     </li>
@@ -25,7 +27,7 @@
                     </li>
                     </#if>
                     <li class="nav-item">
-                        <a class="nav-link" href="activities">Управление тренировками</a>
+                        <a class="nav-link" href="activities">Тренировки</a>
                     </li>
                 </#if>
             </#if>
