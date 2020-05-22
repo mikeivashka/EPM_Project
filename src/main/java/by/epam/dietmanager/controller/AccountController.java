@@ -60,12 +60,19 @@ public class AccountController {
         return "redirect:/user";
     }
 
-    @PreAuthorize("hasAnyAuthority('CLIENT')")
+    @PreAuthorize("hasAnyAuthority('CLIENT', 'NUTRITIONIST')")
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal Client client){
-        model.addAttribute("user", repository.getOne(client.getId()));
-        return "client_profile";
+    public String getClientProfile(Model model, @AuthenticationPrincipal AbstractUser user){
+        if(user instanceof Client){
+            model.addAttribute("user", repository.getOne(user.getId()));
+            return "client_profile";
+        }
+        else{
+            model.addAttribute("user", nutrRepository.getOne(user.getId()));
+            return "nutr_profile";
+        }
     }
+
 
     @PostMapping("profile")
     public String save(@RequestParam("id") Client client,

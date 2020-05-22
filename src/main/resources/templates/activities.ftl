@@ -1,7 +1,6 @@
 <#import "parts/common.ftl" as c>
 <#import "parts/login.ftl" as l>
 <@c.page>
-    <@l.logout/>
     <div class="container" style="text-align: center">
         <h1>Управление тренировками</h1>
         <p class="lead">Сервис для управления базой тренировок</p>

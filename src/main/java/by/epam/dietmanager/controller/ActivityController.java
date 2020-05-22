@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-@RequestMapping("management/activities")
+@RequestMapping("activities")
 public class ActivityController {
 
     @Autowired

@@ -10,9 +10,7 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <button type="submit" class="btn btn-primary" style="margin-top: 10px">Зарегистрироваться</button>
 </form>
-{{#message}}
-    <h1>{{message}}</h1>
-{{/message}}
+    <#if message??>${message}<br></#if>
 <a href="/login">У меня уже есть аккаунт</a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </@c.page>
