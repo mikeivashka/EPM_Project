@@ -1,11 +1,10 @@
 package by.epam.dietmanager.controller;
 
-import by.epam.dietmanager.collections.TrainingType;
-import by.epam.dietmanager.model.Activity;
 import by.epam.dietmanager.model.Dish;
 import by.epam.dietmanager.model.Product;
 import by.epam.dietmanager.repos.DishRepository;
 import by.epam.dietmanager.repos.ProductRepository;
+import by.epam.dietmanager.services.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -26,13 +25,33 @@ public class DishController {
     @Autowired
     ProductRepository prodRepo;
 
-    @PostMapping("/add/dish")
+    @Autowired
+    DishService service;
+
+    @PostMapping("add/dish")
     public String addDish(
-            @RequestParam(value = "prod_id[]") List<String> prod_id,
+            @RequestParam(name = "products[]") List<Integer> prod_id,
             @RequestParam(name = "title")String title,
             @RequestParam String link,
-            @RequestParam (name="calories")Integer calories){
-        return "";
+            @RequestParam (name="calories")Integer calories,
+            Map<String, Object> model){
+        model = service.addDish(model, prod_id, title,link,calories);
+        return "add_dish";
+    }
+
+    @GetMapping("add/dish")
+    public String getDishPage(
+                @RequestParam(defaultValue = "")String title,
+                @RequestParam(defaultValue = "0")Integer calories,
+                @RequestParam(defaultValue = "")String link,
+                Map<String, Object> model
+                ){
+        Iterable<Product> products = prodRepo.findAll();
+        model.put("title", title);
+        model.put("calories", calories);
+        model.put("link", link);
+        model.put("products", products);
+        return "add_dish";
     }
 
     @GetMapping("add/product")
@@ -46,8 +65,8 @@ public class DishController {
             @RequestParam Integer calories,
             Map<String, Object> model
             ){
-        String successMsg = "Блюдо успешно добавлено";
-        String failureMsg = "Данное название уже занято, блюдо не создано";
+        String successMsg = "Продукт успешно добавлен";
+        String failureMsg = "Данное название уже занято, продукт не создан";
         if(prodRepo.findByTitle(title) == null){
             Product product = new Product();
             product.setCaloriesCapacity(calories);

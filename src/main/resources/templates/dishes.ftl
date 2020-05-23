@@ -5,7 +5,7 @@
         <p class="lead">Фильтры</p>
     </div>
 
-    <form method="get" class="form-row mt-1 mb-5 justify-content-between" >
+    <form method="get" class="form-row mt-1 justify-content-between" >
         <div class="form-group col-md-3">
             <label for="exampleInputEmail1">Название</label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="dish_name_filter"
@@ -24,7 +24,10 @@
                    value="10000">
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <button type="submit" style="margin-top: 3%" class="btn btn-primary btn-block">Выбрать</button>
+        <button type="submit" style="margin-top: 3%" class="btn btn-primary btn-block">Применить</button>
+    </form>
+    <form action="/dishes/add/dish">
+        <button class="btn btn-block mt-2 btn-success" type="submit">Создать новое</button>
     </form>
     <table class="table table-responsive-md mt-5">
         <thead>
@@ -58,7 +61,10 @@
             <input type="text" class="form-control" id="exampleInputEmail1" name="prod_filter"
                    value="${prod_filter}">
         </div>
-        <button type="submit" style="margin-top: 3%" class="btn btn-primary btn-block">Выбрать</button>
+        <button type="submit" style="margin-top: 3%" class="btn btn-primary btn-block">Применить</button>
+    </form>
+    <form action="/dishes/add/product">
+        <button class="btn btn-block mt-2 btn-success" type="submit">Создать новое</button>
     </form>
     <table class="table table-responsive-md mt-5">
         <thead>
@@ -77,11 +83,10 @@
         </#list>
         </tbody>
     </table>
-    <div class="container">
-        <a href="/dishes/add/product">Добавить свой продукт...</a>
-    </div>
     <#if message??>
+        <div class="container border-warning">
         <h4 class="text-warning">${message}</h4>
+        </div>
     </#if>
 
 </@c.page>

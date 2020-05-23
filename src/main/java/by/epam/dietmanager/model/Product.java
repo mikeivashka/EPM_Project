@@ -12,6 +12,23 @@ public class Product implements Cloneable {
     private Integer id;
     private String title;
     private int caloriesCapacity;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(Set<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
     private Set<Dish> dishes;
     public Product(){

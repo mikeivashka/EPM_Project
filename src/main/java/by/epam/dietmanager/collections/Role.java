@@ -8,6 +8,7 @@ public enum Role implements GrantedAuthority {
     NUTRITIONIST,
     CLIENT;
 
+
     @Override
     public String getAuthority() {
         return name();

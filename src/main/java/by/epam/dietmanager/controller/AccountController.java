@@ -55,9 +55,9 @@ public class AccountController {
     @PostMapping
     public String changeActiveStatus(@RequestParam String id, @RequestParam(required = false) String active, @RequestParam String role) {
         Integer uid = Integer.valueOf(id);
-        if (role.equals("CLIENT")) {
+        if (role.equals(Role.CLIENT.name())) {
             Client client = clientRepository.getOne(uid);
-            client.setActive(active == null ? false : true);
+            client.setActive(active != null);
             clientRepository.save(client);
         } else {
             Nutritionist nutritionist = nutrRepository.getOne(uid);
@@ -78,28 +78,6 @@ public class AccountController {
             return "nutr_profile";
         }
     }
-
-//    @PostMapping("profile")
-//    @PreAuthorize("hasAnyAuthority('NUTRITIONIST')")
-//    public String saveNutritionist(@RequestParam("id") Nutritionist nutritionist,
-//                                   @RequestParam("email") String email,
-//                                   @RequestParam("password") String password,
-//                                   @RequestParam("name") String name,
-//                                   @RequestParam("surname") String surname,
-//                                   Map<String, Object> model) {
-//        nutritionist.setPassword(password);
-//        nutritionist.setSurname(surname);
-//        nutritionist.setName(name);
-//        if ((clientRepository.findByEmail(email) != null || nutrRepository.findByEmail(email) != null) && !email.equals(nutritionist.getEmail())) {
-//            model.put("message", "Данный e-mail уже занят, изменения не сохранены");
-//            model.put("user", nutritionist);
-//            return "nutr_profile";
-//        } else {
-//            nutritionist.setEmail(email);
-//        }
-//        nutrRepository.save(nutritionist);
-//        return "redirect:profile";
-//    }
 
 
     @PostMapping("profile")

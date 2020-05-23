@@ -48,7 +48,7 @@ public class RegistrationController {
 
     @PostMapping("/registration" )
     public String addUser(Client client, Map<String, Object> model){
-        if(clientRepo.findByEmail(client.getEmail()) == null && clientRepo.findByEmail(client.getEmail()) == null && RegistrationService.isValidEmailAddress(client.getEmail())){
+        if(clientRepo.findByEmail(client.getEmail()) == null && nutritionistRepo.findByEmail(client.getEmail()) == null && RegistrationService.isValidEmailAddress(client.getEmail())){
             client.setRole(Role.CLIENT);
             client.setActive(true);
             clientRepo.save(client);

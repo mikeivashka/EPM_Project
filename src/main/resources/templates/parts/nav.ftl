@@ -30,13 +30,13 @@
                             <a class="nav-link" href="/dishes">Блюда</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="activities">Тренировки</a>
+                            <a class="nav-link" href="/activities">Тренировки</a>
                         </li>
                     </#if>
                 </#if>
             </ul>
             <#if known>
-                <div class="dropdown">
+                <div class="dropdown dropleft">
                     <button class="btn dropdown-toggle" style="background-color:transparent" type="button"
                             id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         ${name}

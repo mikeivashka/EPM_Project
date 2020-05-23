@@ -3,7 +3,7 @@
     <h2>Ваш профиль</h2>
     <form method="post">
         <div class="container">
-            <p>Ваш текущий рейтинг: ${user.rating}</p>
+            <p>Текущий рейтинг: ${user.rating}</p>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -32,7 +32,9 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button type="submit" style="margin-top: 3%" class="btn btn-primary btn-lg btn-block">Сохранить</button>
         <#if message??>
-            <h4 class="text-warning">${message}</h4>
+            <div class="border-warning">
+                <h4 class="text-warning">${message}</h4>
+            </div>
         </#if>
     </form>
 </@c.page>
