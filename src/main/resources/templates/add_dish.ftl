@@ -49,5 +49,4 @@
             <h4 class="text-warning">${failure}</h4>
         </div>
     </#if>
-
 </@c.page>

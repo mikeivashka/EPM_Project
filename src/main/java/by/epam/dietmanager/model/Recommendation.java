@@ -61,6 +61,8 @@ public class Recommendation {
     }
 
     public Recommendation() {
+        date = new Date();
+        complete = false;
     }
 
     public Long getId() {

@@ -27,7 +27,6 @@ public class RegistrationController {
     @PostMapping("nutr/registration")
     public String addNutr(Nutritionist nutritionist, Map<String, Object> model){
         if(clientRepo.findByEmail(nutritionist.getEmail()) == null && nutritionistRepo.findByEmail(nutritionist.getEmail()) == null && RegistrationService.isValidEmailAddress(nutritionist.getEmail())){
-            nutritionist.setRating(8.0);
             nutritionist.setRole(Role.NUTRITIONIST);
             nutritionist.setActive(true);
             nutritionistRepo.save(nutritionist);
@@ -62,7 +61,4 @@ public class RegistrationController {
         }
         return "user_registration";
     }
-
-
-
 }

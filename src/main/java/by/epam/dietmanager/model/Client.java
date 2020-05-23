@@ -3,6 +3,7 @@ package by.epam.dietmanager.model;
 
 import by.epam.dietmanager.collections.ActivityLevel;
 import by.epam.dietmanager.collections.Gender;
+import org.springframework.beans.factory.FactoryBeanNotInitializedException;
 
 import javax.persistence.*;
 
@@ -15,10 +16,10 @@ public class Client extends AbstractUser {
     private double weight;
     @Enumerated(EnumType.ORDINAL)
     private ActivityLevel activityLevel;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nutritionist_id")
     private Nutritionist nutritionist;
-
-
 
     public Client(){
         super();

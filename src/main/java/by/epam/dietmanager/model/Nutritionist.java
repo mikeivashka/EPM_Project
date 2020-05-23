@@ -10,10 +10,41 @@ import java.util.StringJoiner;
 @Table(name = "nutritionist")
 public class Nutritionist extends AbstractUser {
     private Integer experience;
+    @Transient
     private double rating;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Integer totalMark = 8;
+    private Integer marksCount = 1;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nutritionist")
     private Set<Client> clients = new HashSet<>();
+
     public Nutritionist() {
+        rating = totalMark/(double)marksCount;
+    }
+
+    public Integer getTotalMark() {
+        return totalMark;
+    }
+
+    public void setTotalMark(Integer totalMark) {
+        this.totalMark = totalMark;
+    }
+
+    public Integer getMarksCount() {
+        return marksCount;
+    }
+
+    public void setMarksCount(Integer marksCount) {
+        this.marksCount = marksCount;
+    }
+
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
     }
 
     public Nutritionist(String email, String name, String surname, Integer experience, double rating) {
@@ -33,11 +64,8 @@ public class Nutritionist extends AbstractUser {
     }
 
     public double getRating() {
+        rating = totalMark/(double)marksCount;
         return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
     }
 
     @Override

@@ -26,6 +26,11 @@
                                 <a class="nav-link" href="/user">Управление пользователями</a>
                             </li>
                         </#if>
+                        <#if role == "NUTRITIONIST">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/nutr/clients">Мои клиенты</a>
+                            </li>
+                        </#if>
                         <li class="nav-item">
                             <a class="nav-link" href="/dishes">Блюда</a>
                         </li>
@@ -50,6 +55,11 @@
                                            value="Профиль">
                                 </form>
                             </li>
+                            <#if role == "NUTRITIONIST">
+                                <form action="/nutr/clients">
+                                    <input class="btn" style="background-color:transparent" type="submit" value="Мои клиенты">
+                                </form>
+                            </#if>
                         </#if>
                         <li role="separator" class="divider"></li>
                         <li>

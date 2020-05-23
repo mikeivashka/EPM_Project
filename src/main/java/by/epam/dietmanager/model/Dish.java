@@ -31,6 +31,10 @@ public class Dish implements Cloneable {
         this.recepyLink = recepyLink;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public Dish() {
         super();
     }
