@@ -5,7 +5,6 @@ import by.epam.dietmanager.collections.TrainingType;
 import java.util.Objects;
 import java.util.StringJoiner;
 import javax.persistence.*;
-
 @Entity
 public class Activity{
     @Id

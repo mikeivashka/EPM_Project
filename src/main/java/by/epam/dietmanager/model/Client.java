@@ -6,6 +6,7 @@ import by.epam.dietmanager.collections.Gender;
 import org.springframework.beans.factory.FactoryBeanNotInitializedException;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -20,6 +21,9 @@ public class Client extends AbstractUser {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nutritionist_id")
     private Nutritionist nutritionist;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receiver")
+    private Set<Recommendation> recommendations;
 
     public Client(){
         super();

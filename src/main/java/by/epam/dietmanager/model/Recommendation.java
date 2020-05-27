@@ -9,10 +9,16 @@ public class Recommendation {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
+
     @Column(length = 600)
     private String text;
-    private Integer authorId;
-    private Integer receiverId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Nutritionist author;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Client receiver;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "recommendation_dish",
@@ -20,6 +26,7 @@ public class Recommendation {
             inverseJoinColumns = {@JoinColumn(name = "dish.id")}
     )
     private Set<Dish> dishes;
+
     private Integer activityId;
     private Date date;
     private Integer mark;
@@ -81,20 +88,20 @@ public class Recommendation {
         this.text = text;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
+    public Nutritionist getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Nutritionist author) {
+        this.author = author;
     }
 
-    public Integer getReceiverId() {
-        return receiverId;
+    public Client getReceiver() {
+        return receiver;
     }
 
-    public void setReceiverId(Integer receiverId) {
-        this.receiverId = receiverId;
+    public void setReceiver(Client receiver) {
+        this.receiver = receiver;
     }
 
     public Set<Dish> getDishes() {
@@ -118,8 +125,8 @@ public class Recommendation {
         final StringBuilder sb = new StringBuilder("Recommendation{");
         sb.append("id=").append(id);
         sb.append(", text='").append(text).append('\'');
-        sb.append(", authorId=").append(authorId);
-        sb.append(", receiverId=").append(receiverId);
+        sb.append(", author=").append(author);
+        sb.append(", receiver=").append(receiver);
         sb.append(", dishes=").append(dishes);
         sb.append(", activityId=").append(activityId);
         sb.append('}');

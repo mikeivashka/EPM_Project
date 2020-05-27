@@ -5,6 +5,7 @@ import by.epam.dietmanager.model.Client;
 import by.epam.dietmanager.model.Nutritionist;
 import by.epam.dietmanager.repos.ClientRepository;
 import by.epam.dietmanager.repos.NutritionistRepository;
+import by.epam.dietmanager.repos.RecommendationRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Map;
 
 @Controller
@@ -31,19 +31,23 @@ public class ClientController {
     @Autowired
     NutritionistRepository nutrRepo;
 
+    @Autowired
+    RecommendationRepository recomRepo;
+
     @GetMapping("program")
-    public String getProgram(@AuthenticationPrincipal AbstractUser sender, Map<String, Object> model){
+    public String getProgram(@AuthenticationPrincipal AbstractUser sender, Map<String, Object> model) {
         Client client = clientRepo.getOne(sender.getId());
         Nutritionist nutritionist = client.getNutritionist();
-        if(nutritionist == null){
+        if (nutritionist == null) {
             return "redirect:program/start";
         }
+        model.put("recommendations", recomRepo.findByReceiverIdAndAuthorId(client.getId(), client.getNutritionist().getId()));
         model.put("nutr", nutritionist);
         return "program";
     }
 
     @PostMapping("program/unsubscribe")
-    public String unsubscribe(@AuthenticationPrincipal AbstractUser user){
+    public String unsubscribe(@AuthenticationPrincipal AbstractUser user) {
         Client client = clientRepo.getOne(user.getId());
         client.setNutritionist(null);
         clientRepo.save(client);
@@ -51,13 +55,13 @@ public class ClientController {
     }
 
     @GetMapping("program/start")
-    public String startProgram(Map<String, Object> model){
+    public String startProgram(Map<String, Object> model) {
         model.put("nutritionists", nutrRepo.findAll());
         return "quickstart";
     }
 
     @PostMapping("program/save")
-    public String saveNutr(@RequestParam Integer nutrId, @AuthenticationPrincipal AbstractUser user){
+    public String saveNutr(@RequestParam Integer nutrId, @AuthenticationPrincipal AbstractUser user) {
         Client client = clientRepo.getOne(user.getId());
         client.setNutritionist(nutrRepo.getOne(nutrId));
         clientRepo.save(client);

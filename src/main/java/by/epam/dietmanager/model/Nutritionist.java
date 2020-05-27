@@ -18,6 +18,9 @@ public class Nutritionist extends AbstractUser {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nutritionist")
     private Set<Client> clients = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+    private Set<Recommendation> recommendations;
+
     public Nutritionist() {
         rating = totalMark/(double)marksCount;
     }
