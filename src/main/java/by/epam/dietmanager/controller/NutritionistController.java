@@ -53,12 +53,11 @@ public class NutritionistController {
             dishes.add(dishRepo.getOne(dishId));
         }
         recommendation.setReceiver(clientRepo.getOne(clientId));
-        recommendation.setActivityId(activity);
+        recommendation.setActivity(activityRepo.getOne(activity));
         recommendation.setAuthor((Nutritionist) user);
         recommendation.setText(comment);
         recommendation.setDishes(dishes);
         recomRepo.save(recommendation);
-        System.out.println(recomRepo.getOne(recommendation.getId()));
         return "redirect:new/success";
     }
 

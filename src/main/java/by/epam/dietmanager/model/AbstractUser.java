@@ -61,7 +61,7 @@ public abstract class AbstractUser implements Cloneable, UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return active;
     }
 
     @Override

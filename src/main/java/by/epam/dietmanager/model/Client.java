@@ -3,7 +3,6 @@ package by.epam.dietmanager.model;
 
 import by.epam.dietmanager.collections.ActivityLevel;
 import by.epam.dietmanager.collections.Gender;
-import org.springframework.beans.factory.FactoryBeanNotInitializedException;
 
 import javax.persistence.*;
 import java.util.Set;

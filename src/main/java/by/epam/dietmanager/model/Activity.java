@@ -3,6 +3,7 @@ package by.epam.dietmanager.model;
 
 import by.epam.dietmanager.collections.TrainingType;
 import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 import javax.persistence.*;
 @Entity
@@ -15,6 +16,9 @@ public class Activity{
     @Column(length = 600)
     private String description;
     private String link;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "activity", fetch = FetchType.LAZY)
+    private Set<Recommendation> recommendations;
 
     public Activity(TrainingType type, String description, String link) {
         this.type = type;

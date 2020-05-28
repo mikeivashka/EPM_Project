@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 public class Recommendation {
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(length = 600)
@@ -22,12 +22,13 @@ public class Recommendation {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "recommendation_dish",
-            joinColumns = { @JoinColumn(name = "recommendation.id")},
+            joinColumns = {@JoinColumn(name = "recommendation.id")},
             inverseJoinColumns = {@JoinColumn(name = "dish.id")}
     )
     private Set<Dish> dishes;
 
-    private Integer activityId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Activity activity;
     private Date date;
     private Integer mark;
     @Column(length = 600)
@@ -112,12 +113,12 @@ public class Recommendation {
         this.dishes = dishes;
     }
 
-    public Integer getActivityId() {
-        return activityId;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     @Override
@@ -128,7 +129,7 @@ public class Recommendation {
         sb.append(", author=").append(author);
         sb.append(", receiver=").append(receiver);
         sb.append(", dishes=").append(dishes);
-        sb.append(", activityId=").append(activityId);
+        sb.append(", activityId=").append(activity);
         sb.append('}');
         return sb.toString();
     }

@@ -33,20 +33,23 @@
                     <option value="${prod.id}">${prod.title}</option>
                 </#list>
             </select>
+
             <div class="container">
+                <#if success??>
+                    <div class="container mt-1">
+                        <h4 class="text-success">${success}, <a href="/dishes">вернуться к списку</a></h4>
+
+                    </div>
+                </#if>
+                <#if failure??>
+                    <div class="container mt-1 border-warning">
+                        <h4 class="text-warning">${failure}</h4>
+                    </div>
+                </#if>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <button type="submit" style="margin-top: 3%" class="btn btn-primary btn-block">Создать</button>
             </div>
         </div>
     </form>
-    <#if success??>
-        <div class="container mt-1">
-            <h4 class="text-success">${success}</h4>
-        </div>
-    </#if>
-    <#if failure??>
-        <div class="container mt-1 border-warning">
-            <h4 class="text-warning">${failure}</h4>
-        </div>
-    </#if>
+
 </@c.page>
