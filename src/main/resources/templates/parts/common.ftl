@@ -14,7 +14,7 @@
     </div>
 </main>
 <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">© 2019-2020 Dmitri & Mikhail</p>
+    <p class="mb-1">© 2022 Mikhail Ivashka</p>
     <ul class="list-inline">
         <li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.5/examples/checkout/#">Privacy</a></li>
         <li class="list-inline-item"><a href="https://getbootstrap.com/docs/4.5/examples/checkout/#">Terms</a></li>
