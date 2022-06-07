@@ -2,17 +2,19 @@
 <#import "parts/login.ftl" as l>
 <#include "parts/security.ftl">
 <@c.page>
-    <div>
-        <h1 class="main-section1__hero-title1 layout">Добро пожаловать в систему DietManager!</h1>
-        <#if !known>
-            <div class="container">
-                <p>
-                    <a href="/login">Войдите в систему</a> или
-                    <a href="/registration">зарегистрируйтесь</a><br>
-                    чтобы продолжить пользоваться сервисом
-                </p>
+    <div class="container-fluid" style="height: 100vh;">
+        <div class="row" style="margin-top: 10vh; margin-bottom: 20vh">
+            <div class="col-md-4 justify-content-around">
+                <h1 style='text-align: left;' class="display-4">Правильное питание - залог успеха</h1>
+                <p class="text-muted" style="text-align: left">Мы поможем вам решить проблему, подобрав сбалансированную программу питания, в зависимости от ваших целей.</p>
+                <#if !known>
+                    <a href="/login" class="btn btn-primary btn-block">Вход в систему</a>
+                </#if>
             </div>
-        </#if>
+            <div class="col-md-1"/>
+            <div class="col-md-4"><img style="max-width: 40vw" src="/assets/landing_image.png" alt="Generic placeholder image"></div>
+        </div>
+
     </div>
     <main class="main main-main layout">
         <!-- ======= section1 ======= -->
