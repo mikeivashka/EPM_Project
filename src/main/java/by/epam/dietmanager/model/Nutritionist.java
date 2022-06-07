@@ -1,7 +1,5 @@
 package by.epam.dietmanager.model;
 
-import org.springframework.security.core.userdetails.User;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

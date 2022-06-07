@@ -13,7 +13,7 @@
             <div class="form-group col-md-4">
                 <p>Список блюд<br><small>Зажмите CTRL и нажмите на блюдо,чтобы выделить</small></p>
                 <select multiple="multiple" class="form-control w-100" size="10"
-                        name="dishesId[]" required>
+                        name="dishesId[]">
                     <#list dishes as dish>
                         <option value="${dish.id}">${dish.title}(${dish.caloriesCapacity} ккал)</option>
                     </#list>
@@ -22,7 +22,7 @@
             <div class="form-group col-md-4">
                 <p>Тренировки<br><small>Выберите тренировку дня</small></p>
                 <select  class="form-control w-100" size="10"
-                        name="activity" required>
+                        name="activityId">
                     <#list activities as activity>
                         <option value="${activity.id}">${activity.description}(<a href="${activity.link}">ссылка</a>)</option>
                     </#list>

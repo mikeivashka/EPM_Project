@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,22 +39,22 @@ public class NutritionistController {
     RecommendationRepository recomRepo;
 
     @PostMapping("recommendations/new")
-    public String sendRecommendation(@RequestParam(name = "dishesId[]") List<Integer> dishesId,
-                                     @RequestParam Integer activity,
+    public String sendRecommendation(@RequestParam(name = "dishesId[]", required = false, defaultValue = "") List<Integer> dishesId,
+                                     @RequestParam(required = false) Integer activityId,
                                      @RequestParam Integer clientId,
                                      @AuthenticationPrincipal AbstractUser user,
-                                     @RequestParam String comment,
-                                     Map<String, Integer> model
-                                ){
-        Recommendation recommendation = new Recommendation();
+                                     @RequestParam String comment
+    ){
+        var recommendation = new Recommendation();
         Set<Dish> dishes = new HashSet<>();
         for (Integer dishId: dishesId) {
             dishes.add(dishRepo.getOne(dishId));
         }
         recommendation.setReceiverId(clientId);
-        recommendation.setActivityId(activity);
+        recommendation.setActivity(activityRepo.getOne(activityId));
         recommendation.setAuthorId(user.getId());
         recommendation.setText(comment);
+        recommendation.setDishes(dishes);
         recomRepo.save(recommendation);
         return "redirect:new/success";
     }

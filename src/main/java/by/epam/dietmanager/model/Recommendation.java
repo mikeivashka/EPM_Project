@@ -20,7 +20,9 @@ public class Recommendation {
             inverseJoinColumns = {@JoinColumn(name = "dish.id")}
     )
     private Set<Dish> dishes;
-    private Integer activityId;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
     private Date date;
     private Integer mark;
     @Column(length = 600)
@@ -105,24 +107,24 @@ public class Recommendation {
         this.dishes = dishes;
     }
 
-    public Integer getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Integer activityId) {
-        this.activityId = activityId;
-    }
-
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Recommendation{");
+        final var sb = new StringBuilder("Recommendation{");
         sb.append("id=").append(id);
         sb.append(", text='").append(text).append('\'');
         sb.append(", authorId=").append(authorId);
         sb.append(", receiverId=").append(receiverId);
         sb.append(", dishes=").append(dishes);
-        sb.append(", activityId=").append(activityId);
+        sb.append(", activity=").append(activity);
         sb.append('}');
         return sb.toString();
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

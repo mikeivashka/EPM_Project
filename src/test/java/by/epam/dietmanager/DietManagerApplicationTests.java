@@ -3,8 +3,7 @@ package by.epam.dietmanager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class DietManagerApplicationTests {
+class DietManagerApplicationTest {
 
     @Test
     void contextLoads() {
